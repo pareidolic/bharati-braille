@@ -12,7 +12,7 @@ html {
 
 body {
     height: 100%;
-    background-image: url(bg.png);
+    background: white;
     font-size: 8pt;
     color: #404040;
 }
@@ -22,7 +22,7 @@ h1 {
     color: #000;
     font-style: normal;
     font-weight: 100;
-    font-size: 12pt;
+    font-size: 32px;
 }
 
 h2 {
@@ -30,7 +30,7 @@ h2 {
     color: #000;
     font-style: italic;
     font-weight: 100;
-    font-size: 12pt;
+    font-size: 16px;
 }
 
 p {
@@ -43,7 +43,6 @@ a {
 
 #wrapper {
     background-color: white;
-    margin: 0 auto;
     max-width: 960px;
     /* With this, the wrapper resizes when inner elements overflow */
     overflow: auto;
@@ -53,7 +52,6 @@ a {
     background-color: white;
     color: #888;
     max-width: 960px;
-    margin: 0 auto;
 }
 
 #footer_content {
@@ -69,13 +67,26 @@ a {
 
 #header {
     width: 100%;
+    height: 32px;
     text-align: left;
+}
+
+#about {
+    text-align: right;
+    float: left;
+    width: 30%;
+}
+
+#about > h1 > a {
+    color: #dddddd;
+    text-decoration: none;
 }
 
 #text {
     width: 100%;
-    margin-top: 4em;
+    margin-top: 6em;
     margin-bottom: 3%;
+    clear: both;
 }
 
 #input {
@@ -85,16 +96,25 @@ a {
 }
 
 #input_area {
-    padding: 5% 5% 0% 5%;
-    background: #f1f2f2;
+    padding: 2%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-bottom-style: solid;
+    border-bottom-color: #c0c0c0;
+    border-bottom-width: 1px;
+    border-top-style: solid;
+    border-top-color: #53a9b7;
+    border-top-width: 5px;
 }
 
 #submit {
-    margin-top: 4em;
+    margin-top: 2em;
     float: right;
+    font-size: 16px;
 }
 
 #submit > input {
+    font-size: 16px;
     background: transparent;
     padding: 0;
     cursor: pointer;
@@ -106,11 +126,20 @@ a {
     width: 47.5%;
     margin-left: 2.5%;
     float: left;
-    font-size: 8pt;
 }
 
 #output_area {
-    padding: 5% 0% 0% 0%;
+    padding: 2%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    min-height: 300px;
+    font-size: 16px;
+    border-bottom-style: solid;
+    border-bottom-color: #c0c0c0;
+    border-bottom-width: 1px;
+    border-top-style: solid;
+    border-top-color: #faca3f;
+    border-top-width: 5px;
 }
 
 #footer a {
@@ -119,11 +148,6 @@ a {
 
 #footer a:hover {
     color: #444;
-}
-
-#about {
-    width: 50%;
-    float: left;
 }
 
 #madeby {
@@ -146,9 +170,9 @@ a {
     background: transparent;
     /* BUG: font-size and line-height need to be set to an absolute value in px
      * otherwise the auto-resize does not work properly on IE */
-    font-size: 8pt;
+    font-size: 16px;
     line-height: normal;
-    font-family: sans-serif;
+    font-family: Lucida Grande, sans-serif;
     /* Make the text soft-wrap */
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -192,21 +216,21 @@ a {
 
 #submit {
     /* Ensures that the submit button stays above the footer at all times */
-    margin-bottom: 4em;
+    margin-bottom: 2em;
 }
 
 #push {
     /* This should be the same as the footer height */
-    padding-bottom: 4em;
+    padding-bottom: 2em;
 }
 
 #footer {
     clear: both;
     position: relative;
     z-index: 10;
-    height: 4em;
+    height: 2em;
     /* This should be the negative of the footer height */
-    margin-top: -4em;
+    margin-top: -2em;
 }
 /****
  * END: Hacks for the footer floating at the bottom
