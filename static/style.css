@@ -1,0 +1,213 @@
+/* vim: set sts=4 sw=4 et : */
+* {
+    margin: 0;
+    outline: 0;
+    border: 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    background-image: url(bg.png);
+    font-size: 8pt;
+    color: #404040;
+}
+
+h1 {
+    font-family: Century Schoolbook, Georgia, serif;
+    color: #000;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 12pt;
+}
+
+h2 {
+    font-family: Century Schoolbook, Georgia, serif;
+    color: #000;
+    font-style: italic;
+    font-weight: 100;
+    font-size: 12pt;
+}
+
+p {
+    font-family: Lucida Grande, sans-serif;
+}
+
+a {
+    color: #444;
+}
+
+#wrapper {
+    background-color: white;
+    margin: 0 auto;
+    max-width: 960px;
+    /* With this, the wrapper resizes when inner elements overflow */
+    overflow: auto;
+}
+
+#footer {
+    background-color: white;
+    color: #888;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+#footer_content {
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+#content {
+    padding: 5%;
+    padding-top: 4em;
+}
+
+#header {
+    width: 100%;
+    text-align: left;
+}
+
+#text {
+    width: 100%;
+    margin-top: 4em;
+    margin-bottom: 3%;
+}
+
+#input {
+    width: 47.5%;
+    margin-right: 2.5%;
+    float: left;
+}
+
+#input_area {
+    padding: 5% 5% 0% 5%;
+    background: #f1f2f2;
+}
+
+#submit {
+    margin-top: 4em;
+    float: right;
+}
+
+#submit > input {
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    color: #444;
+    text-decoration: underline;
+}
+
+#output {
+    width: 47.5%;
+    margin-left: 2.5%;
+    float: left;
+    font-size: 8pt;
+}
+
+#output_area {
+    padding: 5% 0% 0% 0%;
+}
+
+#footer a {
+    color: #888;
+}
+
+#footer a:hover {
+    color: #444;
+}
+
+#about {
+    width: 50%;
+    float: left;
+}
+
+#madeby {
+    width: 50%;
+    float: left;
+    text-align: right;
+}
+
+/****
+ * BEGIN: hacks to make textarea auto-resize
+ * http://www.alistapart.com/articles/expanding-text-areas-made-elegant/
+ ****/
+.expandingArea {
+    position: relative;
+}
+
+.expandingArea > textarea,
+.expandingArea > pre {
+    width: 100%;
+    background: transparent;
+    /* BUG: font-size and line-height need to be set to an absolute value in px
+     * otherwise the auto-resize does not work properly on IE */
+    font-size: 8pt;
+    line-height: normal;
+    font-family: sans-serif;
+    /* Make the text soft-wrap */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 300px;
+    /* Only allow manual vertical resizing (when JS is unavailable) */
+    resize: vertical;
+}
+
+.expandingArea.active > textarea {
+    /* Hide any scrollbars */
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* Remove WebKit user-resize widget */
+    resize: none;
+}
+
+.expandingArea > pre {
+    display: none;
+}
+
+.expandingArea.active > pre {
+    display: block;
+    /* Hide the text; just using it for sizing */
+    visibility: hidden;
+}
+/****
+ * END: hacks to make textarea auto-resize
+ ****/
+
+/****
+ * BEGIN: Hacks for the footer floating at the bottom
+ ****/
+#wrapper {
+    min-height: 100%;
+    height: 100%;
+    height: auto !important;
+}
+
+#submit {
+    /* Ensures that the submit button stays above the footer at all times */
+    margin-bottom: 4em;
+}
+
+#push {
+    /* This should be the same as the footer height */
+    padding-bottom: 4em;
+}
+
+#footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 4em;
+    /* This should be the negative of the footer height */
+    margin-top: -4em;
+}
+/****
+ * END: Hacks for the footer floating at the bottom
+ ****/

@@ -14,7 +14,7 @@
 import re
 import sys
 
-from mappings import halanth, braille_to_devanagari_priority, braille_to_devanagari
+from .mappings import halanth, braille_to_devanagari_priority, braille_to_devanagari
 
 if sys.version_info.major != 3:
     raise Exception("This program needs Python 3!")
