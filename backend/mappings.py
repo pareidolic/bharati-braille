@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 # vim: set sts=4 sw=4 et :
 #
-# Author:
+# Authors:
 #  Nirbheek Chauhan <nirbheek.chauhan@gmail.com>
+#  Pooja Saxena <anexasajoop@gmail.com>  
 # License:
-#  CC BY-SA
-#  http://creativecommons.org/licenses/by-sa/3.0/
+#  AGPL-3
+#  http://www.gnu.org/licenses/agpl-3.0.html
 #
 # *A* mapping from Devanagari Unicode to Bharati Braille
 # 
@@ -20,75 +21,47 @@
 # * http://rishida.net/scripts/uniview/
 # * http://en.wikipedia.org/wiki/Braille_patterns
 
-###################################
-# Fun facts about Bharati Braille #
-###################################
-# * No conjuncts or ligatures — there isn't enough space in the braille charset
-# * All scripts are mapped to the same braille characters. As a result,
-#   multi-language documents are practically impossible to parse.
-# * The selection of vowels and consonants is pretty arbitrary and incomplete.
-# * The conversion is quite lossy. Several characters are "compressed" into each
-#   other. For example:
-#   0906 (आ) and 093E (ा) are represented by 281C (⠜) 
-#   0915 (क) and 0958 (क़) are represented by 2805 (⠅)
-#   This is kind of lame, but oh well.
-# * In unicode, half-forms are denoted by suffixing consonants with a halanth.
-#   In bharati braille, half-forms are denoted by prefixing consonants with a 
-#   halanth.
-# * Vowels that sound the same (or even "similar"!) use the same symbol
-# * Matras are denoted by their "full forms", as shown in the comment about
-#   lossy conversion above.
-# * Unicode braille has 8 dots (⣿). We use the top 6 (⠿), which are the 
-#   original 6 braille dots. If you see the lower two dots being used by this
-#   convertor or anywhere else, it's wrong!
-# * There is little sense in all this. Linguists are now crying.
-
 
 #################################################
 # Devanagari Unicode to Bharati Braille Mapping #
 #################################################
 
-# This is used for the "halanth-reversal". See below.
-halanth = "⠈"
+## VIRAMA
+# This is used for the "virama-reversal". See converter.py.
+virama = "⠈"
 
-## Priority characters: Converted in the first pass.
-# These are written in unicode as conjuncts, but they have their own Bharati 
-# Braille characters. Hence they must be converted *first*; otherwise we'll 
-# get an expanded form in the Braille.
-braille_to_devanagari_priority = {
-    # क्ष = क ् ष
-     "⠟": ("क्ष",),
-    # ज्ञ = ज ् ञ
-     "⠱": ("ज्ञ",),
-}
-
-## "Normal" characters: All other characters which are converted directly.
-# The exception is the Halanth which needs to be converted from a character 
-# suffix to a character prefix during conversion.
-# We call this the "halanth-reversal"
-braille_to_devanagari = {
-## Special characters
-     "⠈": ("्",), # Halant
+## PUNCTUATION
+punctuation = {
      "⠂": (",",), # Comma (swalp-viraam)
      "⠆": (";",), # Semi-colon (ardh-viraam)
      "⠒": (":",), # Colon (apurn-viraam)
     # TODO: Hyphens and dashes, pg 32
-    # "⠂": ("ऽ",), # Avagraha (same as comma, wtf?)
-    # ॥ has no mapping, so we stick it in here
-     "⠲": ("।", "॥"),
+    # ॥ has no direct mapping in Bharati Braille.
+     "⠲": ("।",), # Devanagari single danda
      "⠖": ("!",), # Exclamation point (udgar-chinh)
      "⠦": ("?",), # Question mark (prashn-chinh)
-     # TODO: ASCII quotes missing.
-      "⠦": ('“',), # Opening double quote (Sadharan avataran chinh)
-      "⠴": ('”',), # Closing double quote (Sadharan avataran chinh)
-      "⠠⠦": ('‘',), # Opening single quote (Aantariya avataran chinh)
-      "⠴⠄": ('’',), # Closing single quote (Aantariya avataran chinh)
-      "⠶": ("(", ")"), # Round brackets (Koshthak)
-      "⠠⠶": ("[",), # Opening square bracket (Koshthak)
-      "⠶⠄": ("]",), # Closing square bracket (Koshthak)
-      "⠠⠠⠠": ("…",), # Ellipsis
-      "⠔⠔": ("*",), # Asterisk
-## Numerals (ASCII and Devanagari)
+    # TODO: ASCII quotes missing.
+     "⠦": ('“',), # Opening double quote (Sadharan avataran chinh)
+     "⠴": ('”',), # Closing double quote (Sadharan avataran chinh)
+     "⠠⠦": ('‘',), # Opening single quote (Aantariya avataran chinh)
+     "⠴⠄": ('’',), # Closing single quote (Aantariya avataran chinh)
+     "⠶": ("(", ")"), # Round brackets (Koshthak)
+     "⠠⠶": ("[",), # Opening square bracket (Koshthak)
+     "⠶⠄": ("]",), # Closing square bracket (Koshthak)
+     "⠠⠠⠠": ("…",), # Ellipsis
+     "⠔⠔": ("*",), # Asterisk 
+}
+
+## DASHES
+# They need to be in a different variable
+# Because they require the number symbol to be put before each number if they are put between two numbers.
+# That is not the case with other punctuation symbols like the hyphen, mathematical comma (see below), apostrophe and _vakra rekha_
+dash = {
+  
+}
+
+## NUMBERS
+numbers = {
       "⠼⠁": ("1",  "१"),  # 1
       "⠼⠃": ("2",  "२"),  # 2
       "⠼⠉": ("3",  "३"),  # 3
@@ -99,40 +72,58 @@ braille_to_devanagari = {
       "⠼⠓": ("8",  "८"),  # 8
       "⠼⠊": ("9",  "९"),  # 9
       "⠼⠚": ("0",  "०"),  # 0
-      # TODO: Commas between numbers like 1,500,000 are different (pg 36)
-      # TODO: More numbers shit on pg 36
-      # TODO: Fractions, pg 37
-      # TODO: Decimals, pg 38
-## Math symbols
+}
+
+## MATHEMATICAL SYMBOLS
+math_symbols = {
       "⠬": ("+", ), # + (plus sign)
       "⠤": ("−", ), # − (minus sign)
       "⠈⠡": ("×", ), # × (multiplication sign)
       "⠨⠌": ("÷", ), # ÷ (division sign)
       "⠨⠅": ("=", ), # = (equal sign)
-      "⠈⠴⠅": ("%", ), # % (percentage sign)
-      # TODO: Number symbol when using math signs (pg 39)
-## "Vowels"
-     "⠠": ("ः",),  # Visarg
-     "⠰": ("ं",), # Anusvar
-     "⠄": ("ँ",), # Chandrabindu
+      "⠈⠴⠅": ("%", ), # % (percentage sign)  
+}
+
+## MATHEMATICAL COMMA
+# Used when a comma is inside a long number to indicate places, like 1,500,000.
+math_comma = {
+  "⠠": (",") # Same Braille character as the visarga
+}
+
+## VARIOUS DEVANAGARI SIGNS
+various_signs = {
+     "⠈": ("्"), # Virama; it is repeated here because earlier no mapping is defined.
+   #"⠂": ("ऽ",), # Avagraha (same mapping as comma?)
+     "⠰": ("ं", "ँ"), # Anusvara and Chandra-bindu share a single Braille character
+     "⠠": ("ः"), # Visarga
+
+}
+
+## VOWELS AND VOWEL SIGNS
+# In Bharati Braille, each vowel and its corresponding vowel sign (or matra) is represented by the same Braille character.
+vowels = {
      "⠁": ("अ",),
+     # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign. 
      "⠜": ("आ", "ा" ),
      "⠊": ("इ", "ि"),
      "⠔": ("ई", "ी"),
      "⠥": ("उ", "ु"),
      "⠳": ("ऊ", "ू"),
-    # ॠ and ॄ have no mapping, so they're lumped here
-     "⠐⠗": ("ॠ", "ऋ", "ृ", "ॄ"),
-     "⠢": ("ऍ", "ॅ"), # Parichhed
-    # ऎ and ॆ have no mapping, so they're lumped here
-     "⠑": ("ऎ", "ए", "ॆ", "े",),
+    # ॠ and ॄ have no direct mapping in Bharati Braille.
+     "⠐⠗": ("ऋ", "ृ"),
+     "⠢": ("ऍ", "ॅ"),
+    # ऎ and ॆ have no direct mapping in Bharati Braille.
+     "⠑": ("ए", "े",),
      "⠌": ("ऐ", "ै"),
-     "⠭": ("ऑ",),
-    # ऒ and ॊ have no mapping, so they're lumped here
-     "⠕": ("ऒ", "ओ", "ॊ", "ो"),
+     "⠭": ("ऑ","ॉ"),
+    # ऒ and ॊ have no direct mapping in Bharati Braille.
+     "⠕": ("ओ", "ो"),
      "⠪": ("औ", "ौ"),
-## "Consonants"
-     "⠅": ("क", "क़"),
+} 
+
+## CONSONANTS
+consonants = {
+    "⠅": ("क", "क़"),
      "⠨": ("ख", "ख़"),
      "⠛": ("ग", "ग़"),
      "⠣": ("घ",),
@@ -167,18 +158,40 @@ braille_to_devanagari = {
      "⠯": ("ष",),
      "⠎": ("स",),
      "⠓": ("ह",),
- ## Nuktaa stuff
-# Nuktaa characters assigned separate symbols
+# Nukta characters that have been assigned separate symbols in Braille
      "⠻": ("ड़",),
      "⠐⠻": ("ढ़",),
 }
 
+
+## AKHAND LIGATURES
+# Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
+# Some of these are represented as unique characters in Bharati Braille.
+# They must be converted first; otherwise we'll get an expanded form of these conjuncts in the Braille transcription.
+akhand = {
+    # क्ष = क + ् + ष
+     "⠟": ("क्ष",),
+    # ज्ञ = ज + ् + ञ
+     "⠱": ("ज्ञ",),
+}
+
+
+# TODO: How do we handle Nuktas?
+# TODO: Hyphens and dashes, pg 32
+# TODO: ASCII quotes missing.
+# TODO: Commas between numbers like 1,500,000 are different (pg 36)
+# TODO: More numbers shit on pg 36
+# TODO: Fractions, pg 37
+# TODO: Decimals, pg 38
+# TODO: Number symbol when using math signs (pg 39)
+
+
 ## Devanagari characters that have no mapping.
 # This isn't used anywhere yet. It exists only for documentation.
+# Haven't reviewed these yet.
 _without_mapping = [
     # Characters which could be shoved somewhere else, just not sure where:
-    ("ऄ", "ॲ", "ऌ", "ॡ", "ॢ", "ॣ", "ॻ", "ॼ", "ॾ", "ॿ", "ॽ", "०", "१", "२", "३",
-     "४", "५", "६", "७", "८", "९"),
+    ("ऄ", "ऌ", "ॡ", "ॢ", "ॣ", "ॻ", "ॼ", "ॾ", "ॿ", "ॽ"),
     # Characters without any mappings which can't be lumped anywhere else:
     ("ऀ", "ऺ", "ऻ", "़", "ॎ", "ॏ", "ॐ", "॑", "॒", "॓", "॔", "ॕ", "ॖ", "ॗ", "॰",
      "ॱ", "ॳ", "ॴ", "ॵ", "ॶ", "ॷ", "ॹ", "ॺ",),
