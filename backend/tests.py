@@ -5,8 +5,8 @@
 # Author:
 #  Nirbheek Chauhan <nirbheek.chauhan@gmail.com>
 # License:
-#  CC BY-SA
-#  http://creativecommons.org/licenses/by-sa/3.0/
+#  AGPL-3.0
+#  http://www.gnu.org/licenses/agpl-3.0.html
 #
 # Tests for the Devanagari Unicode to Bharati Braille convertor
 #
