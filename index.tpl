@@ -38,6 +38,7 @@
             <div id="output_area">
               {{braille}}
             </div>
+            <p id="fake_submit">&nbsp;</p>
           </div>
         </div>
       </div>
