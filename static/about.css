@@ -1,0 +1,129 @@
+/* vim: set sts=4 sw=4 et : */
+* {
+    margin: 0;
+    outline: 0;
+    border: 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    background: white;
+    font-size: 8pt;
+    color: #404040;
+}
+
+h1 {
+    font-family: Century Schoolbook, Georgia, serif;
+    color: #000;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 32px;
+}
+
+h2 {
+    font-family: Century Schoolbook, Georgia, serif;
+    color: #000;
+    font-style: italic;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+p {
+    font-family: Lucida Grande, sans-serif;
+}
+
+a {
+    color: #444;
+}
+
+#wrapper {
+    background-color: white;
+    max-width: 960px;
+    /* With this, the wrapper resizes when inner elements overflow */
+    overflow: auto;
+}
+
+#footer {
+    background-color: white;
+    color: #888;
+    max-width: 960px;
+}
+
+#footer_content {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+#content {
+    padding: 5%;
+    padding-top: 4em;
+}
+
+#header {
+    width: 100%;
+    height: 32px;
+    text-align: left;
+}
+
+#about {
+    text-align: right;
+    float: left;
+    width: 30%;
+}
+
+#about > h1 > a {
+    color: #dddddd;
+    text-decoration: none;
+}
+
+#text {
+    width: 100%;
+    margin-top: 6em;
+    margin-bottom: 3%;
+    clear: both;
+}
+
+#footer a {
+    color: #888;
+}
+
+#footer a:hover {
+    color: #444;
+}
+
+#madeby {
+    width: 100%;
+    float: left;
+    text-align: right;
+}
+
+/****
+ * BEGIN: Hacks for the footer floating at the bottom
+ ****/
+#wrapper {
+    min-height: 100%;
+    height: 100%;
+    height: auto !important;
+}
+
+#push {
+    /* This should be the same as the footer height */
+    padding-bottom: 2em;
+}
+
+#footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 2em;
+    /* This should be the negative of the footer height */
+    margin-top: -2em;
+}
+/****
+ * END: Hacks for the footer floating at the bottom
+ ****/
