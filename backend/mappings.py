@@ -30,17 +30,24 @@
 # This is used for the "virama-reversal". See converter.py.
 virama = "⠈"
 
+## SCHWA
+# This is used for the consonant-vowel idiosyncracy. See converter.py
+schwa = "⠁"
+
 ## PUNCTUATION
 punctuation = {
      "⠂": (",",), # Comma (swalp-viraam)
      "⠆": (";",), # Semi-colon (ardh-viraam)
      "⠒": (":",), # Colon (apurn-viraam)
-    # TODO: Hyphens and dashes, pg 32
-    # ॥ has no direct mapping in Bharati Braille.
      "⠲": ("।",), # Devanagari single danda
+     "⠲⠲": ("॥",), # Devanagari double danda
      "⠖": ("!",), # Exclamation point (udgar-chinh)
      "⠦": ("?",), # Question mark (prashn-chinh)
-    # TODO: ASCII quotes missing.
+     "⠠⠠⠠": ("…",), # Ellipsis
+     "⠔⠔": ("*",), # Asterisk 
+}
+
+paired_punctuation = {
      "⠦": ('“',), # Opening double quote (Sadharan avataran chinh)
      "⠴": ('”',), # Closing double quote (Sadharan avataran chinh)
      "⠠⠦": ('‘',), # Opening single quote (Aantariya avataran chinh)
@@ -48,62 +55,70 @@ punctuation = {
      "⠶": ("(", ")"), # Round brackets (Koshthak)
      "⠠⠶": ("[",), # Opening square bracket (Koshthak)
      "⠶⠄": ("]",), # Closing square bracket (Koshthak)
-     "⠠⠠⠠": ("…",), # Ellipsis
-     "⠔⠔": ("*",), # Asterisk 
 }
+
+## ELLIPSIS (composed of dots)
+fake_ellipsis = ("⠠⠠⠠", "...")
 
 ## DASHES
 # They need to be in a different variable
 # Because they require the number symbol to be put before each number if they are put between two numbers.
 # That is not the case with other punctuation symbols like the hyphen, mathematical comma (see below), apostrophe and _vakra rekha_
-dash = {
-  
+dashes = {
+    "⠤": ("‐", "-"), # Hyphen and hyphen-minus,  "dash" (two-hyphens or en-dash), and "double dash" (four hyphens or em-dash)
+    "⠤⠤": ("–",), # en-dash
+    "⠤⠤⠤⠤": ("—",), # em-dash
 }
 
 ## NUMBERS
+number_prefix = "⠼"
 numbers = {
-      "⠼⠁": ("1",  "१"),  # 1
-      "⠼⠃": ("2",  "२"),  # 2
-      "⠼⠉": ("3",  "३"),  # 3
-      "⠼⠙": ("4",  "४"),  # 4
-      "⠼⠑": ("5",  "५"),  # 5
-      "⠼⠋": ("6",  "६"),  # 6
-      "⠼⠛": ("7",  "७"),  # 7
-      "⠼⠓": ("8",  "८"),  # 8
-      "⠼⠊": ("9",  "९"),  # 9
-      "⠼⠚": ("0",  "०"),  # 0
+      "⠁": ("1",  "१"),  # 1
+      "⠃": ("2",  "२"),  # 2
+      "⠉": ("3",  "३"),  # 3
+      "⠙": ("4",  "४"),  # 4
+      "⠑": ("5",  "५"),  # 5
+      "⠋": ("6",  "६"),  # 6
+      "⠛": ("7",  "७"),  # 7
+      "⠓": ("8",  "८"),  # 8
+      "⠊": ("9",  "९"),  # 9
+      "⠚": ("0",  "०"),  # 0
 }
 
 ## MATHEMATICAL SYMBOLS
+# NOTE: Completely ignored
 math_symbols = {
       "⠬": ("+", ), # + (plus sign)
       "⠤": ("−", ), # − (minus sign)
       "⠈⠡": ("×", ), # × (multiplication sign)
       "⠨⠌": ("÷", ), # ÷ (division sign)
       "⠨⠅": ("=", ), # = (equal sign)
-      "⠈⠴⠅": ("%", ), # % (percentage sign)  
+      "⠈⠴⠅": ("%", ), # % (percentage sign) 
 }
 
-## MATHEMATICAL COMMA
+## MATHEMATICAL PUNCTUATION
 # Used when a comma is inside a long number to indicate places, like 1,500,000.
-math_comma = {
-  "⠠": (",") # Same Braille character as the visarga
+# In both these cases, the number sign (⠼) will only come once—right at the beginning
+math_punctuation = {
+  "⠠": (",",), # Same Braille character as the visarga
+  "⠨": (".",), # Decimal point
 }
 
 ## VARIOUS DEVANAGARI SIGNS
 various_signs = {
-     "⠈": ("्"), # Virama; it is repeated here because earlier no mapping is defined.
+     "⠈": ("्",), # Virama; it is repeated here because earlier no mapping is defined.
    #"⠂": ("ऽ",), # Avagraha (same mapping as comma?)
-     "⠰": ("ं", "ँ"), # Anusvara and Chandra-bindu share a single Braille character
-     "⠠": ("ः"), # Visarga
-
+     "⠰": ("ं", "ँ",), # Anusvara and Chandra-bindu share a single Braille character
+     "⠠": ("ः",), # Visarga
+	 "": ("़",), # Nukta is being completely ignored (except for ड़ and ढ़)
 }
 
 ## VOWELS AND VOWEL SIGNS
 # In Bharati Braille, each vowel and its corresponding vowel sign (or matra) is represented by the same Braille character.
+# If there is more than one devanagari character, make sure that the first is the vowel, and not the matra
 vowels = {
-     "⠁": ("अ",),
-     # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign. 
+     # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign.
+     "⠁": ("अ",), # This is repeated here because earlire no mapping is defined.
      "⠜": ("आ", "ा" ),
      "⠊": ("इ", "ि"),
      "⠔": ("ई", "ी"),
@@ -163,7 +178,6 @@ consonants = {
      "⠐⠻": ("ढ़",),
 }
 
-
 ## AKHAND LIGATURES
 # Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
 # Some of these are represented as unique characters in Bharati Braille.
@@ -175,16 +189,16 @@ akhand = {
      "⠱": ("ज्ञ",),
 }
 
-
-# TODO: How do we handle Nuktas?
-# TODO: Hyphens and dashes, pg 32
-# TODO: ASCII quotes missing.
-# TODO: Commas between numbers like 1,500,000 are different (pg 36)
 # TODO: More numbers shit on pg 36
 # TODO: Fractions, pg 37
-# TODO: Decimals, pg 38
 # TODO: Number symbol when using math signs (pg 39)
 
+## Heuristics
+# Dumb (ASCII) quote detection?
+# Forward slash between numbers (and otherwise) should trigger a warning, and skip the word
+# Math symbols should trigger the math warning, and skip the equation
+# Unencoded devanagari characters should trigger an unknown warning, and skip the word
+# Unknown characters should trigger an unknown warning, and skip the word
 
 ## Devanagari characters that have no mapping.
 # This isn't used anywhere yet. It exists only for documentation.
