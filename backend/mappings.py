@@ -34,6 +34,10 @@ virama = "⠈"
 # This is used for the consonant-vowel idiosyncracy. See converter.py
 schwa = "⠁"
 
+## ELLIPSIS
+# Used for converting a "fake ellipsis" (...) as well. See converter.py
+ellipsis = "⠠⠠⠠"
+
 ## PUNCTUATION
 punctuation = {
      "⠂": (",",), # Comma (swalp-viraam)
@@ -56,9 +60,6 @@ paired_punctuation = {
      "⠠⠶": ("[",), # Opening square bracket (Koshthak)
      "⠶⠄": ("]",), # Closing square bracket (Koshthak)
 }
-
-## ELLIPSIS (composed of dots)
-fake_ellipsis = ("⠠⠠⠠", "...")
 
 ## DASHES
 # They need to be in a different variable
