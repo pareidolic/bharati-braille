@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim: set sts=4 sw=4 et :
 #
-# Author:
+# Authors:
 #  Nirbheek Chauhan <nirbheek.chauhan@gmail.com>
 # License:
 #  AGPL-3.0
@@ -17,7 +17,7 @@ import unittest
 if sys.version_info.major != 3:
     raise Exception("This program needs Python 3!")
 
-DEVA_INPUT = \
+ACHARYA_DEVA_INPUT = \
 """वन्दे मातरं वन्दे मातरम्
 सुजलां सुफलां मलयज शीतलाम्
 शश्य श्यामलां मातरं वन्दे मातरम्।
@@ -26,7 +26,7 @@ DEVA_INPUT = \
 सुहासिनीं सुमधुर भाषिनीम्
 सुखदां वरदां मातरं वन्दे मातरम्।"""
 
-DEVA_OUTPUT = \
+ACHARYA_DEVA_OUTPUT = \
 """⠧⠈⠝⠙⠑ ⠍⠜⠞⠗⠰ ⠧⠈⠝⠙⠑ ⠍⠜⠞⠗⠈⠍
 ⠎⠥⠚⠇⠜⠰ ⠎⠥⠖⠇⠜⠰ ⠍⠇⠽⠚ ⠩⠔⠞⠇⠜⠈⠍
 ⠩⠈⠩⠽ ⠈⠩⠽⠜⠍⠇⠜⠰ ⠍⠜⠞⠗⠰ ⠧⠈⠝⠙⠑ ⠍⠜⠞⠗⠈⠍⠲
@@ -54,9 +54,10 @@ class TestDevanagari(unittest.TestCase):
         MATH_OUTPUT = "⠼⠉⠉⠉ ⠼⠁⠠⠃⠠⠃ ⠼⠁⠠⠚⠚⠚⠠⠚⠚⠚ ⠼⠁⠨⠚⠨⠙ ⠼⠨⠓ ⠼⠨⠁⠨⠁ ⠼⠛⠨⠋ ⠼⠓. ⠼⠊⠊⠊, ,⠼⠑⠑⠑"
         self.assertEqual(translate_math (MATH_INPUT), MATH_OUTPUT)
 
-    def test_devanagari_conversion(self):
+    def test_acharya_devanagari_conversion(self):
         from converters import convert_devanagari_to_braille
-        self.assertEqual(convert_devanagari_to_braille (DEVA_INPUT), DEVA_OUTPUT)
+        self.assertEqual(convert_devanagari_to_braille (ACHARYA_DEVA_INPUT),
+                         ACHARYA_DEVA_OUTPUT)
 
 
 if __name__ == "__main__":
