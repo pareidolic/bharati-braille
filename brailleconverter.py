@@ -21,6 +21,10 @@ def index():
 def server_static(filetype, filepath):
     return static_file(filepath, root="./{0}".format(filetype))
 
+@get("/<favicon:re:.*\.(ico|png)>")
+def server_static(favicon):
+    return static_file(favicon, root="./")
+
 @get("/<filename>.html")
 def serve_html(filename):
     return static_file("{0}.html".format(filename), root="./")
