@@ -70,13 +70,9 @@ for (braille, devanagari_list) in priority_mappings.items():
     for each in devanagari_list:
         d_to_b_priority[each] = braille
 d_to_b_punctuation = {}
-for (braille, devanagari_list) in punctuation.items():
+for (braille, devanagari_list) in punctuation.items() | paired_punctuation.items():
     for each in devanagari_list:
         d_to_b_punctuation[each] = braille
-d_to_b_paired_punctuation = {}
-for (braille, devanagari_list) in paired_punctuation.items():
-    for each in devanagari_list:
-        d_to_b_paired_punctuation[each] = braille
 d_to_b_numbers = {}
 for (braille, devanagari_list) in numbers.items():
     for each in devanagari_list:
