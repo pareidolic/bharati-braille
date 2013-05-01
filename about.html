@@ -3,28 +3,315 @@
 <html lang="en">
 <meta charset="UTF-8">
 <head>
-	<title>Braille Converter</title>
+	<title>Bharati Braille Converter</title>
 	<link rel="stylesheet" href="static/about.css" lang="text/css" media="screen" />
-  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="shortcut icon" href="favicon.ico"/>
 </head>
 
 <body>
     <div id="wrapper">
       <div id="content">
         <div id="header">
-          <h1>About the converter</h1>
+          <div id="heading"><h1><a href="/">Devanagari to Bharati Braille</a></h1></div>
+          <div id="about"><h1>About</h1></div>
         </div>
-        <div id="text">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-        </div>
-      </div>
-      <!-- This exists purely for the sticky footer. Keep it the last div. -->
-      <div id="push"></div>
-    </div>
 
-    <div id="footer">
-      <div id="footer_content">
-        <p id="madeby">Made by <a href="">Pareidolic</a></p>
+        <div id="logo">
+          <a href="http://pareidolic.in"><img src="static/pareidolic.png" width="100px"></img></a>
+        </div>
+
+        <div id="text">
+          <i>Bharati Braille</i> Converter has been built by <a href="http://pareidolic.in" target="_blank">Pareidolic</a>.
+          <br/><br/>
+          All the documentation and text in this project is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">CC-by-NC-SA</a>, and the Python, JS, HTML, and CSS files are licensed under <a href="http://www.gnu.org/licenses/agpl-3.0.html" target="_blank">AGPL-3</a>. Feel free to write to us at talk[at]pareidolic[dot]in to tell us about any inconsistencies or errors that you may find, your feedback, or recommendations about which Indian script we should work on next. And if you decide to build something new using this converter, do drop in a line!
+          <br/><br/><br/><br/>
+
+
+          <h3>How it works</h3>
+          <p>Braille is a tactile writing system used by the blind and visually-impaired. Each character (or number or symbol) is represented in Braille by selectively raising dots in a 2×4 grid. <i>Bharati Braille</i> is a largely unified system devised to write the languages spoken and read in India. This converter <b>transforms <i>Hindi</i> and <i>Marathi</i> text in the <i>Devanagari</i> script to <i>Bharati Braille</i></b> based on the rules outlined in <i>Bharati Braille Shikshak</i>, a <a href="http://www.nabindia.org/Publication_publications.htm" target="_blank">publication</a> by India’s <a href="http://www.nabindia.org/" target="_blank">National Association for the Blind</a>. The table below shows the mapping of the basic character set:</p>
+          <br/><br/>
+
+          <h4>Vowels</h4>
+
+          <br/>
+
+          <table><tbody>
+            <tr class="braille">
+              <td>⠁</td>
+              <td>⠜</td>
+              <td>⠊</td>
+              <td>⠔</td>
+              <td>⠥</td> 
+            </tr>
+
+            <tr class="devanagari">
+              <td>अ</td>
+              <td>आ</td>
+              <td>इ</td>
+              <td>ई</td>
+              <td>उ</td>  
+            </tr>
+
+            <tr class="braille">
+              <td>⠳</td>
+              <td>⠑</td>
+              <td>⠌</td>
+              <td>⠕</td>
+              <td>⠪</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>ऊ</td>
+              <td>ए</td>
+              <td>ऐ</td>
+              <td>ओ</td>
+              <td>औ</td>
+            </tr>
+
+          </tbody>
+          </table>
+
+          <br/><br/>
+
+          <h4>Consonants</h4>
+
+          <br/>
+
+          <table><tbody>
+            <tr class="braille">
+              <td>⠅</td>
+              <td>⠨</td>
+              <td>⠛</td>
+              <td>⠣</td>
+              <td>⠬</td> 
+            </tr>
+
+            <tr class="devanagari">
+              <td>क</td>
+              <td>ख</td>
+              <td>ग</td>
+              <td>घ</td>
+              <td>ङ</td>  
+            </tr>
+
+            <tr class="braille">
+              <td>⠉</td>
+              <td>⠡</td>
+              <td>⠚</td>
+              <td>⠴</td>
+              <td>⠒</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>च</td>
+              <td>छ</td>
+              <td>ज</td>
+              <td>झ</td>
+              <td>ञ</td>
+            </tr>
+
+            <tr class="braille">
+              <td>⠾</td>
+              <td>⠺</td>
+              <td>⠫</td>
+              <td>⠿</td>
+              <td>⠼</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>ट</td>
+              <td>ठ</td>
+              <td>ड</td>
+              <td>ढ</td>
+              <td>ण</td>
+            </tr>
+
+            <tr class="braille">
+              <td>⠞</td>
+              <td>⠹</td>
+              <td>⠙</td>
+              <td>⠮</td>
+              <td>⠝</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>त</td>
+              <td>थ</td>
+              <td>द</td>
+              <td>ध</td>
+              <td>न</td>
+            </tr>
+
+            <tr class="braille">
+              <td>⠏</td>
+              <td>⠖</td>
+              <td>⠃</td>
+              <td>⠘</td>
+              <td>⠍</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>प</td>
+              <td>फ</td>
+              <td>ब</td>
+              <td>भ</td>
+              <td>म</td>
+            </tr>
+
+            <tr class="braille">
+              <td>⠽</td>
+              <td>⠗</td>
+              <td>⠇</td>
+              <td>⠸</td>
+              <td>⠧</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>य</td>
+              <td>र</td>
+              <td>ल</td>
+              <td>ळ</td>
+              <td>व</td>
+            </tr>
+
+            <tr class="braille">
+              <td>⠩</td>
+              <td>⠯</td>
+              <td>⠎</td>
+              <td>⠓</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>श</td>
+              <td>ष</td>
+              <td>स</td>
+              <td>ह</td>
+            </tr>
+
+          </tbody>
+          </table>
+
+          <br/><br/>
+
+          Of course, the conversion is not as straightforward as a simple mapping and the <i>Bharati Braille</i> system has several <a href="#limitations">limitations</a>. It uses only the top six dots of the 2×4 grid, and thus has only 63 (the 64th one is an empty cell and used to denote a space) different Braille cells to represent the alphabet, numbers and any other symbols. As a result, the same cell is often used to represent more than one entity, and the meaning is made clear by the context in which it is used. The converter takes these idiosyncrasies into consideration and attempts to make the translation between <i>Devanagari</i> and <i>Bharati Braille</i> as accurate as possible. It should be noted, that while the converter is good for translating long texts, in its current avatar it is <a href="#math_content">not suitable for mathematical content</a>. A heavily-commented, human-readable version of the script used by the converter can be found <a href="https://github.com/pareidolic/bharati-braille" target="_blank">here</a>.
+          <br/><br/><br/><br/><br/>
+
+          <h3 id="limitations">Limitations of <i>Bharati Braille</i></h3>
+
+          <br/>
+
+          <b>Re-use of the same cells for vowels and vowel signs</b>
+          <br/>
+          Every vowel and its corresponding vowel sign or matra is represented by only a single Braille cell, not two different glyphs like <i>Devanagari</i>. This makes the transcription of words with a full vowel in the middle or end erroneous if the preceding consonant does not have an explicit vowel attached to it. <i>Bharati Braille</i> solves this problem by indicating the inherent schwa vowel (अ) explicitly in such cases. Without this workaround, there would be no way to differentiate between words like बंबई and  बंबी.
+
+          <br/><br/>
+
+          <b>Re-use of cells for numbers and letters</b>
+          <br/>
+          Numerals use the same Braille cells that the alphabet do and use a special Braille numeral sign before them so that they can be identified.
+
+          <br/><br/>
+
+          <b>Limited support for consonants with a nukta</b>
+          <br/>
+          Only two consonants with nuktas, ड़ and ढ़, are assigned separate cells in <i>Bharati Braille</i>. As a result, all other such consonants are swapped out by their base forms by the converter.
+
+          <br/><br/>
+
+          <b>Limited support for punctuation signs</b>
+          <br/>
+          <i>Bharati Braille</i> assigns cells only to a limited set of punctuation signs. And even for some of these, braille cells used for <i>Devanagari</i> signs are re-used. Below is the list of supported punctuation:
+          <br/><br/>
+
+          <table><tbody>
+            <tr class="braille">
+              <td>⠂</td>
+              <td>⠆</td>
+              <td>⠒</td>
+              <td>⠖</td>
+              <td>⠦</td> 
+            </tr>
+
+            <tr class="devanagari">
+              <td>,</td>
+              <td>;</td>
+              <td>:</td>
+              <td>!</td>
+              <td>?</td>  
+            </tr>
+
+            <tr class="braille">
+              <td>⠦</td>
+              <td>⠴</td>
+              <td>⠠⠦</td>
+              <td>⠴⠄</td>
+              <td>⠶</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>“</td>
+              <td>”</td>
+              <td>‘</td>
+              <td>’</td>
+              <td>) and (</td>
+            </tr>
+
+            <tr class="braille">
+              <td>⠠⠶</td>
+              <td>⠶⠄</td>
+              <td>⠤</td>
+              <td>⠤⠤</td>
+              <td><span style="font-size: 40px;">⠤⠤⠤⠤</span></td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>[</td>
+              <td>]</td>
+              <td>-</td>
+              <td>–</td>
+              <td>—</td>
+            </tr>
+
+            <tr class="braille">
+              <td><span style="font-size: 40px;">⠠⠠⠠</span></td>
+              <td>⠔⠔</td>
+              <td>⠲</td>
+            </tr>
+
+            <tr class="devanagari">
+              <td>…</td>
+              <td>*</td>
+              <td>।</td>
+            </tr>
+
+          </tbody>
+          </table>
+
+          <br/><br/>
+
+          <b>Unassigned <i>Devanagari</i> glyphs</b>
+          <br/>
+          Several glyphs that are encoded in the Unicode range 0900–097F reserved for <a href="http://www.unicode.org/charts/PDF/U0900.pdf" target="_blank">Devanagari</a> remain unassigned in <i>Bharati Braille</i>. These include characters used for transcribing <i>Dravidian</i> sounds and letters belonging to <i>Kashmiri</i> and <i>Sindhi</i> languages. In addition, no characters from the <a href="http://www.unicode.org/charts/PDF/UA8E0.pdf" target="_blank">Devanagari Extended</a> and <a href="http://www.unicode.org/charts/PDF/U1CD0.pdf" target="_blank">Vedic Extensions</a> Unicode charts are assigned cells in <i>Bharati Braille</i>.
+
+          <br/><br/><br/><br/><br/>
+
+          <h3>Limitations of the Converter</h3>
+
+          <br/>
+
+          <b id="math_content">Not suitable for mathematical content</b>
+          <br/>
+          In its current form, this <i>Devanagari</i> to <i>Bharati Braille</i> Converter is not suitable for mathematical content. If your text contains numerals, they will be converted to <i>Bharati Braille</i>, however any mathematical operators, such as +, −, ×, ÷, = or %, will not be. If your text does contain any of these (or other operators), an error message will be displayed.
+
+          <br/><br/>
+
+          <b>Handling of dumb and smart quotes</b>
+          <br/>
+          <i>Bharati Braille</i> has provision for Latin <a href="http://quotesandaccents.com/" target="_blank">smart quotes</a> (single and double), but not for dumb quotes. The converter cannot accept dumb quotes and intelligently substitute them with the correct Braille smart quotes based on context of use. If there are dumb quotes in your text, they will not be converted and an error message highlighting their presence will be displayed.
+
+          <br/><br/><br/><br/><br/>
+
+        </div>
       </div>
     </div>
 </body>

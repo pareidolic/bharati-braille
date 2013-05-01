@@ -41,6 +41,11 @@ a {
     color: #444;
 }
 
+@font-face {
+    font-family: "Pareidolic Braille";
+    src: url("Pareidolic Braille.ttf");
+}
+
 #wrapper {
     background-color: white;
     max-width: 960px;
@@ -60,8 +65,8 @@ a {
 }
 
 #content {
-    padding: 5%;
-    padding-top: 4em;
+    padding: 7%;
+    padding-top: 6em;
 }
 
 #header {
@@ -81,9 +86,18 @@ a {
     text-decoration: none;
 }
 
+#heading {
+    text-align: left;
+    float: left;
+    width: 70%;
+}
+
+#heading > h1 {
+}
+
 #text {
     width: 100%;
-    margin-top: 6em;
+    margin-top: 10em;
     margin-bottom: 3%;
     clear: both;
 }
@@ -132,7 +146,11 @@ a {
     padding-top: 5%;
     padding-bottom: 5%;
     min-height: 300px;
-    font-size: 16px;
+
+    font-size: 24px;
+    line-height: 30px;
+    font-family: "Pareidolic Braille";
+
     border-bottom-style: solid;
     border-bottom-color: #c0c0c0;
     border-bottom-width: 1px;
@@ -169,7 +187,7 @@ a {
     background: transparent;
     /* BUG: font-size and line-height need to be set to an absolute value in px
      * otherwise the auto-resize does not work properly on IE */
-    font-size: 16px;
+    font-size: 14px;
     line-height: normal;
     font-family: Lucida Grande, sans-serif;
     /* Make the text soft-wrap */
@@ -216,21 +234,21 @@ a {
 #submit, #fake_submit {
     /* Ensures that the submit button stays above the footer at all times
      * and that the output_area stays above the footer. */
-    margin-bottom: 2em;
+    margin-bottom: 6em;
 }
 
 #push {
     /* This should be the same as the footer height */
-    padding-bottom: 2em;
+    padding-bottom: 6em;
 }
 
 #footer {
     clear: both;
     position: relative;
     z-index: 10;
-    height: 2em;
+    height: 6em;
     /* This should be the negative of the footer height */
-    margin-top: -2em;
+    margin-top: -6em;
 }
 /****
  * END: Hacks for the footer floating at the bottom

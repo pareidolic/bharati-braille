@@ -18,7 +18,7 @@ body {
 }
 
 h1 {
-    font-family: Century Schoolbook, Georgia, serif;
+    font-family: Georgia, serif;
     color: #000;
     font-style: normal;
     font-weight: 100;
@@ -26,19 +26,54 @@ h1 {
 }
 
 h2 {
-    font-family: Century Schoolbook, Georgia, serif;
+    font-family: Georgia, Century Schoolbook, serif;
     color: #000;
     font-style: italic;
     font-weight: 100;
     font-size: 16px;
 }
 
-p {
-    font-family: Lucida Grande, sans-serif;
+h3 {
+   /* border-bottom-style: solid;
+    border-bottom-color: #444;
+    border-bottom-width: 3px; 
+    margin-bottom: 30px; */
+    padding-bottom: 15px;
 }
 
-a {
-    color: #444;
+table {
+    border-collapse:collapse;
+    width: 640px;
+}
+
+td {
+    border: 1px solid #bbb;
+}
+
+tr.braille {
+    background-color: #f0f0f0;
+    height: 80px;
+    font-size: 72px;
+    text-align: center;
+    max-width: 640px;
+}
+
+tr.devanagari {
+    font-size: 24px;
+    text-align: center;
+    padding: 5px;
+    max-width: 600px;
+}
+
+th {
+    background-color: #eee;
+    padding: 10px;
+    font-weight: 200;
+}
+
+td {
+    padding: 10px;
+    max-width: 80px;
 }
 
 #wrapper {
@@ -60,8 +95,8 @@ a {
 }
 
 #content {
-    padding: 5%;
-    padding-top: 4em;
+    padding: 7%;
+    padding-top: 6em;
 }
 
 #header {
@@ -76,16 +111,45 @@ a {
     width: 30%;
 }
 
-#about > h1 > a {
+#about > h1 {
+}
+
+#heading {
+    text-align: left;
+    float: left;
+    width: 70%;
+}
+
+#heading > h1 > a {
     color: #dddddd;
     text-decoration: none;
 }
 
+#logo{
+    float: left;
+/*    margin-left: 20px; */
+    margin-top: 10em;
+}
+
 #text {
-    width: 100%;
-    margin-top: 6em;
+   /* margin-left: 200px; */
+    width: 650px;
+    font-family: Georgia, Century Schoolbook, serif;
+    font-size: 18px;
+    line-height: 26px;
+    float: right;
+    margin-top: 6em; 
     margin-bottom: 3%;
-    clear: both;
+   /* clear: both; */
+}
+
+#text a {
+    color: #53a9b7; /*Blue*/
+    text-decoration: none;
+}
+
+#text a:hover{
+    color: #faca3f; /*Yellow*/
 }
 
 #footer a {

@@ -18,9 +18,9 @@ def index():
 def server_static(filetype, filepath):
     return static_file(filepath, root="./{0}".format(filetype))
 
-@get("/<text>")
-def echo(text=""):
-    return text
+@get("/<filename>.html")
+def serve_html(filename):
+    return static_file("{0}.html".format(filename), root="./")
 
 if __name__ == "__main__":
-    run(host="brailleconverter.pareidolic.in", port=8080)
+    run(host="bharati-braille.pareidolic.in", port=8080)
