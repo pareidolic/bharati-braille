@@ -105,6 +105,10 @@ td {
     text-align: left;
 }
 
+#header a:hover {
+    text-decoration: underline;
+}
+
 #about {
     text-align: right;
     float: left;
