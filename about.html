@@ -193,10 +193,10 @@
 
           <br/><br/>
 
-          Of course, the conversion is not as straightforward as a simple mapping and the <i>Bharati Braille</i> system has several <a href="#limitations">limitations</a>. It uses only the top six dots of the 2×4 grid, and thus has only 63 (the 64th one is an empty cell and used to denote a space) different Braille cells to represent the alphabet, numbers and any other symbols. As a result, the same cell is often used to represent more than one entity, and the meaning is made clear by the context in which it is used. The converter takes these idiosyncrasies into consideration and attempts to make the translation between <i>Devanagari</i> and <i>Bharati Braille</i> as accurate as possible. It should be noted, that while the converter is good for translating long texts, in its current avatar it is <a href="#math_content">not suitable for mathematical content</a>. A heavily-commented, human-readable version of the script used by the converter can be found <a href="https://github.com/pareidolic/bharati-braille" target="_blank">here</a>.
+          Of course, the conversion is not as straightforward as a simple mapping and the <i>Bharati Braille</i> system has several <a href="#bb_limitations">limitations</a>. It uses only the top six dots of the 2×4 grid, and thus has only 63 (the 64th one is an empty cell and used to denote a space) different Braille cells to represent the alphabet, numbers and any other symbols. As a result, the same cell is often used to represent more than one entity, and the meaning is made clear by the context in which it is used. The converter takes these idiosyncrasies into consideration and attempts to make the translation between <i>Devanagari</i> and <i>Bharati Braille</i> as accurate as possible. It should be noted, that while the converter is good for translating long texts, in its current avatar it is <a href="#conv_limitations">not suitable for mathematical content</a>. A heavily-commented, human-readable version of the script used by the converter can be found <a href="https://github.com/pareidolic/bharati-braille" target="_blank">here</a>.
           <br/><br/><br/><br/><br/>
 
-          <h3 id="limitations">Limitations of <i>Bharati Braille</i></h3>
+          <h3 id="bb_limitations">Limitations of <i>Bharati Braille</i></h3>
 
           <br/>
 
@@ -295,11 +295,11 @@
 
           <br/><br/><br/><br/><br/>
 
-          <h3>Limitations of the Converter</h3>
+          <h3 id="conv_limitations">Limitations of the Converter</h3>
 
           <br/>
 
-          <b id="math_content">Not suitable for mathematical content</b>
+          <b>Not suitable for mathematical content</b>
           <br/>
           In its current form, this <i>Devanagari</i> to <i>Bharati Braille</i> Converter is not suitable for mathematical content. If your text contains numerals, they will be converted to <i>Bharati Braille</i>, however any mathematical operators, such as +, −, ×, ÷, = or %, will not be. If your text does contain any of these (or other operators), an error message will be displayed.
 

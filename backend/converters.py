@@ -26,8 +26,7 @@ from mappings import vowels, consonants, various_signs, dashes
 from mappings import punctuation, paired_punctuation
 from mappings import numbers, number_prefix
 from mappings import math_punctuation
-# TODO: Math symbols will be handled with a warning and passed through unchanged
-#from mappings import numbers, math_symbols
+from mappings import dumb_quotes, math_symbols
 
 # Sets of all consonants, and vowel characters.
 # This list is used for the vowel idiosyncracy where 'अ' is placed explicitly 
@@ -51,6 +50,11 @@ for value in vowels.values():
 number_chars = set()
 for value in numbers.values():
     number_chars.update(value)
+
+# Set of all math symbols
+all_math_symbols = set()
+for value in math_symbols.values():
+    all_math_symbols.update(value)
 
 # Consonants+vowels that need to be converted before simple_letter_mappings
 priority_mappings = akhand
@@ -155,7 +159,17 @@ def convert_devanagari_to_braille(text, debug=False):
     new_text = virama_reversal(new_text)
     if debug:
         print ("After viraama-reversal:\n"+new_text)
-    return new_text
+
+    # Warn about unhandled stuff
+    warnings = ""
+    text_set = set(new_text)
+    if text_set.intersection(set(dumb_quotes)):
+        warnings += """<p class="warning">The convertor does not handle <a href="about.html#conv_limitations">dumb quotes</a>.</p>\n"""
+    if text_set.intersection(all_math_symbols):
+        warnings += """<p class="warning">The convertor does not handle <a href="about.html#conv_limitations">mathematical operators</a>.</p>\n"""
+    if warnings:
+        warnings += "<br/>"
+    return (new_text, warnings)
 
 if __name__ == "__main__":
     print("Please enter the line of Devanagari to be converted to Bharati Braille")

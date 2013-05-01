@@ -65,11 +65,11 @@ class TestDevanagari(unittest.TestCase):
 
     def test_acharya_devanagari_conversion(self):
         from converters import convert_devanagari_to_braille
-        self.assertEqual(convert_devanagari_to_braille (ACHARYA_DEVA_INPUT), ACHARYA_DEVA_OUTPUT)
+        self.assertEqual(convert_devanagari_to_braille (ACHARYA_DEVA_INPUT)[0], ACHARYA_DEVA_OUTPUT)
 
     def test_shikshak_conversion(self):
         from converters import convert_devanagari_to_braille
-        self.assertEqual(convert_devanagari_to_braille (SHIKSHAK_INPUT), SHIKSHAK_OUTPUT)
+        self.assertEqual(convert_devanagari_to_braille (SHIKSHAK_INPUT)[0], SHIKSHAK_OUTPUT)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

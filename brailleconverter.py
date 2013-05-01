@@ -11,8 +11,11 @@ if sys.version_info.major != 3:
 def index():
     input_text = request.forms.devanagari
 #    input_text = "कर अपनी शायरी की दुनिया में आ बैठा और तीन ही साल की मश्क़ ने मेरी कल्पना के जौहर खोल"
-    braille = convert_devanagari_to_braille(input_text)
-    return template("index", input_text=input_text, braille=braille)
+    (braille, warnings) = convert_devanagari_to_braille(input_text)
+    return template("index", 
+                    input_text=input_text,
+                    braille=braille,
+                    warnings=warnings)
 
 @get("/<filetype:re:(js|static)>/<filepath:path>")
 def server_static(filetype, filepath):

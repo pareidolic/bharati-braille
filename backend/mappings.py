@@ -51,6 +51,8 @@ punctuation = {
      "⠔⠔": ("*",), # Asterisk 
 }
 
+# This is placed separately because it shares braille characters with
+# 'punctuation', and that's bad for a dictionary
 paired_punctuation = {
      "⠦": ('“',), # Opening double quote (Sadharan avataran chinh)
      "⠴": ('”',), # Closing double quote (Sadharan avataran chinh)
@@ -60,6 +62,9 @@ paired_punctuation = {
      "⠠⠶": ("[",), # Opening square bracket (Koshthak)
      "⠶⠄": ("]",), # Closing square bracket (Koshthak)
 }
+
+# Dumb quotes that we can't translate to bharati braille
+dumb_quotes = ("'", '"');
 
 ## DASHES
 # They need to be in a different variable

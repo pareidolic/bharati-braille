@@ -151,16 +151,18 @@ a {
     padding-bottom: 5%;
     min-height: 300px;
 
-    font-size: 24px;
-    line-height: 30px;
-    font-family: "Pareidolic Braille";
-
     border-bottom-style: solid;
     border-bottom-color: #c0c0c0;
     border-bottom-width: 1px;
     border-top-style: solid;
     border-top-color: #faca3f;
     border-top-width: 5px;
+}
+
+#braille_output {
+    font-size: 24px;
+    line-height: 30px;
+    font-family: "Pareidolic Braille";
 }
 
 #footer a {
