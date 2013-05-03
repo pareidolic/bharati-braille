@@ -81,18 +81,19 @@ dashes = {
 ####################
 
 ## NUMBERS
+# Ordered as Latin, Devanagari, Tamil, Gujarati, Bengali
 number_prefix = "⠼"
 numbers = {
-      "⠁": ("1", "१", "૧"),  # One
-      "⠃": ("2", "२", "૨"),  # Two
-      "⠉": ("3", "३", "૩"),  # Three
-      "⠙": ("4", "४", "૪"),  # Four
-      "⠑": ("5", "५", "૫"),  # Five
-      "⠋": ("6", "६", "૬"),  # Six
-      "⠛": ("7", "७", "૭"),  # Seven
-      "⠓": ("8", "८", "૮"),  # Eight
-      "⠊": ("9", "९", "૯"),  # Nine
-      "⠚": ("0", "०", "૦"),  # Zero
+      "⠁": ("1", "१", "૧", "১"),  # One
+      "⠃": ("2", "२", "૨", "২"),  # Two
+      "⠉": ("3", "३", "૩", "৩"),  # Three
+      "⠙": ("4", "४", "૪", "৪"),  # Four
+      "⠑": ("5", "५", "૫", "৫"),  # Five
+      "⠋": ("6", "६", "૬", "৬"),  # Six
+      "⠛": ("7", "७", "૭", "৭"),  # Seven
+      "⠓": ("8", "८", "૮", "৮"),  # Eight
+      "⠊": ("9", "९", "૯", "৯"),  # Nine
+      "⠚": ("0", "०", "૦", "০"),  # Zero
 }
 
 ## MATHEMATICAL SYMBOLS
@@ -117,6 +118,105 @@ math_punctuation = {
 # TODO: More numbers shit on pg 36
 # TODO: Fractions, pg 37
 # TODO: Number symbol when using math signs (pg 39)
+
+
+##############################################
+# Bengali Unicode to Bharati Braille Mapping #
+##############################################
+
+## VIRAMA
+# This is used for the "virama-reversal". See converter.py.
+bn_virama = "⠈"
+
+## SCHWA
+# This is used for the "consonant-vowel idiosyncracy". See converter.py
+bn_schwa = "⠁"
+
+## VARIOUS SIGNS
+# Various signs added here as Unicode escape codes because several scripts
+# have the same signs, and they look very similar as well.
+# Done to ensure accuracy.
+bn_various_signs = {
+    "⠈": ("\u09CD",), #Virama
+    "⠂": ("\u09BD",), # Avagraha (same mapping as comma?)
+    "⠄": ("\u0981",), # Chandra-bindu
+    "⠰": ("\u0982",), # Anusvara    
+    "⠠": ("\u0983",), # Visarga
+    "": ("\u09BC",), # No Braille cell assigned for Bengali Nukta
+}
+
+## VOWELS AND VOWEL SIGNS
+# In Bharati Braille, each vowel and its corresponding vowel sign (or matra) 
+# is represented by the same Braille character.
+bn_vowels = {
+     # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign.
+     "⠁": ("অ",), # Letter A
+     "⠜": ("আ", "া" ), # Letter AA
+     "⠊": ("ই", "ি"), # Letter I
+     "⠔": ("ঈ", "ী"), # Letter II
+     "⠥": ("উ", "ু"), # Letter U
+     "⠳": ("ঊ", "ূ"), # Letter UU
+     "⠐⠗": ("ঋ", "ৃ"), # Letter Vocalic R
+     "⠠⠇": ("ঌ","ৢ"), # Letter Vocalic L
+     "⠑": ("এ", "ে",), # Letter E
+     "⠌": ("ঐ", "ৈ"), # Letter AI
+     "⠕": ("ও", "ो"), # Letter O
+     "⠪": ("ঔ", "ौ"), # Letter AU
+} 
+
+## CONSONANTS
+bn_consonants = {
+     "⠅": ("ক",), # Letter KA
+     "⠨": ("খ",), # Letter KHA
+     "⠛": ("গ",), # Letter GA
+     "⠣": ("ঘ",), # Letter GHA
+     "⠬": ("ঙ",), # Letter NGA
+     "⠉": ("চ",), # Letter CA
+     "⠡": ("ছ",), # Letter CHA
+     "⠚": ("জ",), # Letter JA
+     "⠴": ("ঝ",), # Letter JHA
+     "⠒": ("ঞ",), # Letter NYA
+     "⠾": ("ট",), # Letter TTA
+     "⠺": ("ঠ",), # Letter TTHA
+     "⠫": ("ড",), # Letter DDA
+     "⠿": ("ঢ",), # Letter DDHA
+     "⠼": ("ণ",), # Letter NNA
+     "⠞": ("ত",), # Letter TA
+     "⠹": ("থ",), # Letter THA
+     "⠙": ("দ",), # Letter DA
+     "⠮": ("ধ",), # Letter DHA
+     "⠝": ("ন",), # Letter NA
+     "⠏": ("প",), # Letter PA
+     "⠖": ("ফ",), # Letter PHA
+     "⠃": ("ব",), # Letter BA
+     "⠘": ("ভ",), # Letter BHA
+     "⠍": ("ম",), # Letter MA
+     "⠽": ("য",), # Letter YA
+     "⠗": ("র",), # Letter RA
+     "⠇": ("ল",), # Letter LA
+     "⠧": ("ব",), ## Are Bengali BA and VA represented by the same letter? Reference needed. ##
+     "⠩": ("শ",), # Letter SHA
+     "⠯": ("ষ",), # Letter SSA
+     "⠎": ("স",), # Letter SA
+     "⠓": ("হ",), # Letter HA
+# Nukta characters that have been assigned separate symbols in Braille
+     "⠻": ("ড়",), # Letter RRA
+     "⠐⠻": ("ঢ়",), # Letter RHA
+     "⠢": ("য়",) # Letter YYA
+}
+
+## AKHAND LIGATURES
+# Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
+# Some of these are represented as unique characters in Bharati Braille.
+# They must be converted first; otherwise we'll get an expanded form of these conjuncts in the Braille transcription.
+bn_akhand = {
+    # ক্ষ = ক + ্ + ষ
+     "⠟": ("ক্ষ",),
+    # জ্ঞ = জ + ্ + ঞ
+     "⠱": ("জ্ঞ",),
+}
+
+
 
 ###############################################
 # Gujarati Unicode to Bharati Braille Mapping #
