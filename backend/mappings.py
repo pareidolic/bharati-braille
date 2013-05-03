@@ -111,12 +111,16 @@ math_punctuation = {
 }
 
 ## VARIOUS DEVANAGARI SIGNS
+# Various signs added here as Unicode escape codes because several scripts
+# have the same signs, and they look very similar as well.
+# Done to ensure accuracy.
 various_signs = {
-     "⠈": ("्",), # Virama; it is repeated here because earlier no mapping is defined.
-   #"⠂": ("ऽ",), # Avagraha (same mapping as comma?)
-     "⠰": ("ं", "ँ",), # Anusvara and Chandra-bindu share a single Braille character
-     "⠠": ("ः",), # Visarga
-	 "": ("़",), # Nukta is being completely ignored (except for ड़ and ढ़)
+    "⠈": ("\u094D",), #Virama; it is repeated here because earlier no mapping is defined.
+    "⠂": ("\u093D",), # Avagraha (same mapping as comma)
+    "⠄": ("\u0901",), # Chandra-bindu
+    "⠰": ("\u0902",), # Anusvara    
+    "⠠": ("\u0903",), # Visarga
+    "": ("\u093C",), # Nukta is being completely ignored (except for ड़ and ढ़)
 }
 
 ## VOWELS AND VOWEL SIGNS
@@ -124,13 +128,15 @@ various_signs = {
 # If there is more than one devanagari character, make sure that the first is the vowel, and not the matra
 vowels = {
      # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign.
-     "⠁": ("अ",), # This is repeated here because earlire no mapping is defined.
+     "⠁": ("अ",), # This is repeated here because earlier no mapping is defined.
      "⠜": ("आ", "ा" ),
      "⠊": ("इ", "ि"),
      "⠔": ("ई", "ी"),
      "⠥": ("उ", "ु"),
      "⠳": ("ऊ", "ू"),
-    # ॠ and ॄ have no direct mapping in Bharati Braille.
+     "⠠⠗": ("ॠ","ॄ"),
+     "⠠⠇": ("ऌ","ॢ"),
+     "⠠⠇": ("ॡ","ॣ"),
      "⠐⠗": ("ऋ", "ृ"),
      "⠢": ("ऍ", "ॅ"),
     # ऎ and ॆ have no direct mapping in Bharati Braille.
@@ -211,7 +217,7 @@ akhand = {
 # Haven't reviewed these yet.
 _without_mapping = [
     # Characters which could be shoved somewhere else, just not sure where:
-    ("ऄ", "ऌ", "ॡ", "ॢ", "ॣ", "ॻ", "ॼ", "ॾ", "ॿ", "ॽ"),
+    ("ऄ", "ॻ", "ॼ", "ॾ", "ॿ", "ॽ"),
     # Characters without any mappings which can't be lumped anywhere else:
     ("ऀ", "ऺ", "ऻ", "़", "ॎ", "ॏ", "ॐ", "॑", "॒", "॓", "॔", "ॕ", "ॖ", "ॗ", "॰",
      "ॱ", "ॳ", "ॴ", "ॵ", "ॶ", "ॷ", "ॹ", "ॺ",),
