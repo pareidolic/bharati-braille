@@ -22,21 +22,9 @@
 # * http://en.wikipedia.org/wiki/Braille_patterns
 
 
-#################################################
-# Devanagari Unicode to Bharati Braille Mapping #
-#################################################
-
-## VIRAMA
-# This is used for the "virama-reversal". See converter.py.
-virama = "⠈"
-
-## SCHWA
-# This is used for the consonant-vowel idiosyncracy. See converter.py
-schwa = "⠁"
-
-## ELLIPSIS
-# Used for converting a "fake ellipsis" (...) as well. See converter.py
-ellipsis = "⠠⠠⠠"
+################################
+# Language-agnostic characters #
+################################
 
 ## PUNCTUATION
 punctuation = {
@@ -50,6 +38,10 @@ punctuation = {
      "⠠⠠⠠": ("…",), # Ellipsis
      "⠔⠔": ("*",), # Asterisk 
 }
+
+## ELLIPSIS
+# Used for converting a "fake ellipsis" (...) as well. See converter.py
+ellipsis = "⠠⠠⠠"
 
 # This is placed separately because it shares braille characters with
 # 'punctuation', and that's bad for a dictionary
@@ -76,19 +68,31 @@ dashes = {
     "⠤⠤⠤⠤": ("—",), # em-dash
 }
 
+## Heuristics
+# Dumb (ASCII) quote detection?
+# Forward slash between numbers (and otherwise) should trigger a warning, and skip the word
+# Math symbols should trigger the math warning, and skip the equation
+# Unencoded devanagari characters should trigger an unknown warning, and skip the word
+# Unknown characters should trigger an unknown warning, and skip the word
+
+
+####################
+# Numbers and Math #
+####################
+
 ## NUMBERS
 number_prefix = "⠼"
 numbers = {
-      "⠁": ("1",  "१"),  # 1
-      "⠃": ("2",  "२"),  # 2
-      "⠉": ("3",  "३"),  # 3
-      "⠙": ("4",  "४"),  # 4
-      "⠑": ("5",  "५"),  # 5
-      "⠋": ("6",  "६"),  # 6
-      "⠛": ("7",  "७"),  # 7
-      "⠓": ("8",  "८"),  # 8
-      "⠊": ("9",  "९"),  # 9
-      "⠚": ("0",  "०"),  # 0
+      "⠁": ("1", "१", "૧"),  # One
+      "⠃": ("2", "२", "૨"),  # Two
+      "⠉": ("3", "३", "૩"),  # Three
+      "⠙": ("4", "४", "૪"),  # Four
+      "⠑": ("5", "५", "૫"),  # Five
+      "⠋": ("6", "६", "૬"),  # Six
+      "⠛": ("7", "७", "૭"),  # Seven
+      "⠓": ("8", "८", "૮"),  # Eight
+      "⠊": ("9", "९", "૯"),  # Nine
+      "⠚": ("0", "०", "૦"),  # Zero
 }
 
 ## MATHEMATICAL SYMBOLS
@@ -110,108 +114,221 @@ math_punctuation = {
   "⠨": (".",), # Decimal point
 }
 
-## VARIOUS DEVANAGARI SIGNS
-various_signs = {
-     "⠈": ("्",), # Virama; it is repeated here because earlier no mapping is defined.
-   #"⠂": ("ऽ",), # Avagraha (same mapping as comma?)
-     "⠰": ("ं", "ँ",), # Anusvara and Chandra-bindu share a single Braille character
-     "⠠": ("ः",), # Visarga
-	 "": ("़",), # Nukta is being completely ignored (except for ड़ and ढ़)
-}
+# TODO: More numbers shit on pg 36
+# TODO: Fractions, pg 37
+# TODO: Number symbol when using math signs (pg 39)
+
+###############################################
+# Gujarati Unicode to Bharati Braille Mapping #
+###############################################
+
+## VIRAMA
+# This is used for the "virama-reversal". See converter.py.
+gj_virama = "⠈"
+
+## SCHWA
+# This is used for the consonant-vowel idiosyncracy. See converter.py
+gj_schwa = "⠁"
 
 ## VOWELS AND VOWEL SIGNS
-# In Bharati Braille, each vowel and its corresponding vowel sign (or matra) is represented by the same Braille character.
-# If there is more than one devanagari character, make sure that the first is the vowel, and not the matra
-vowels = {
-     # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign.
-     "⠁": ("अ",), # This is repeated here because earlire no mapping is defined.
-     "⠜": ("आ", "ा" ),
-     "⠊": ("इ", "ि"),
-     "⠔": ("ई", "ी"),
-     "⠥": ("उ", "ु"),
-     "⠳": ("ऊ", "ू"),
-    # ॠ and ॄ have no direct mapping in Bharati Braille.
-     "⠐⠗": ("ऋ", "ृ"),
-     "⠢": ("ऍ", "ॅ"),
-    # ऎ and ॆ have no direct mapping in Bharati Braille.
-     "⠑": ("ए", "े",),
-     "⠌": ("ऐ", "ै"),
-     "⠭": ("ऑ","ॉ"),
-    # ऒ and ॊ have no direct mapping in Bharati Braille.
-     "⠕": ("ओ", "ो"),
-     "⠪": ("औ", "ौ"),
+# In Bharati Braille, vowels and their corresponding
+# vowel signs are represented by the same Braille pattern.
+gj_vowels = {
+     "⠁": ("અ",), 
+     "⠜": ("આ", "ા" ),
+     "⠊": ("ઇ", "િ"),
+     "⠔": ("ઈ", "ી"),
+     "⠥": ("ઉ", "ુ"),
+     "⠳": ("ઊ", "ૂ"),
+     "⠐⠗": ("ઋ", "ૃ"),
+     "⠠⠗": ("ૠ", "ૄ"), 
+     "⠢": ("ઍ", "ૅ"),
+     "⠑": ("એ", "ે",),
+     "⠌": ("ઐ", "ૈ"),
+     "⠭": ("ઑ","ૉ"),
+     "⠕": ("ઓ", "ો"),
+     "⠪": ("ઔ", "ૌ"),
 } 
 
 ## CONSONANTS
-consonants = {
-    "⠅": ("क", "क़"),
-     "⠨": ("ख", "ख़"),
-     "⠛": ("ग", "ग़"),
-     "⠣": ("घ",),
-     "⠬": ("ङ",),
-     "⠉": ("च",),
-     "⠡": ("छ",),
-    # Yes. This is not a mistake. JA and ZA are the same.
-     "⠚": ("ज", "ज़"),
-     "⠴": ("झ",),
-     "⠒": ("ञ",),
-     "⠾": ("ट",),
-     "⠺": ("ठ",),
-     "⠫": ("ड",),
-     "⠿": ("ढ",),
-     "⠼": ("ण",),
-     "⠞": ("त",),
-     "⠹": ("थ",),
-     "⠙": ("द",),
-     "⠮": ("ध",),
-     "⠝": ("न", "ऩ"),
-     "⠏": ("प",),
-     "⠖": ("फ", "फ़"),
-     "⠃": ("ब",),
-     "⠘": ("भ",),
-     "⠍": ("म",),
-     "⠽": ("य", "य़",),
-     "⠗": ("र", "ऱ"),
-     "⠇": ("ल",),
-     "⠸": ("ळ", "ऴ"),
-     "⠧": ("व",),
-     "⠩": ("श",),
-     "⠯": ("ष",),
-     "⠎": ("स",),
-     "⠓": ("ह",),
-# Nukta characters that have been assigned separate symbols in Braille
-     "⠻": ("ड़",),
-     "⠐⠻": ("ढ़",),
+gj_consonants = {
+    "⠅": ("ક",),
+     "⠨": ("ખ",),
+     "⠛": ("ગ",),
+     "⠣": ("ઘ",),
+     "⠬": ("ઙ",),
+     "⠉": ("ચ",),
+     "⠡": ("છ",),
+     "⠚": ("જ",),
+     "⠴": ("ઝ",),
+     "⠒": ("ઞ",),
+     "⠾": ("ટ",),
+     "⠺": ("ઠ",),
+     "⠫": ("ડ",),
+     "⠿": ("ઢ",),
+     "⠼": ("ણ",),
+     "⠞": ("ત",),
+     "⠹": ("થ",),
+     "⠙": ("દ",),
+     "⠮": ("ધ",),
+     "⠝": ("ન",),
+     "⠏": ("પ",),
+     "⠖": ("ફ",),
+     "⠃": ("બ",),
+     "⠘": ("ભ",),
+     "⠍": ("મ",),
+     "⠽": ("ય",),
+     "⠗": ("ર",),
+     "⠇": ("લ",),
+     "⠸": ("ળ",),
+     "⠧": ("વ",),
+     "⠩": ("શ",),
+     "⠯": ("ષ",),
+     "⠎": ("સ",),
+     "⠓": ("હ",),
+}
+
+## VARIOUS SIGNS
+# Various signs added here as Unicode escape codes because several scripts
+# have the same signs, and they look very similar as well.
+# Done to ensure accuracy.
+gj_various_signs = {
+    "⠈": ("\u0ACD",), #Virama
+    "⠂": ("\u0ABD",), # Avagraha (same mapping as comma?)
+    "⠄": ("\u0A81",), # Chandra-bindu
+    "⠰": ("\u0A82",), # Anusvara    
+    "⠠": ("\u0A83",), # Visarga
+    "": ("\u0ABC",), # No Braille cell assigned for Gujarati Nukta
 }
 
 ## AKHAND LIGATURES
 # Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
 # Some of these are represented as unique characters in Bharati Braille.
 # They must be converted first; otherwise we'll get an expanded form of these conjuncts in the Braille transcription.
-akhand = {
+gj_akhand = {
+    # ક્ષ = ક + ્ + ષ
+     "⠟": ("ક્ષ",),
+    # જ્ઞ = જ + ્ + ઞ
+     "⠱": ("જ્ઞ",),
+}
+
+## WITHOUT MAPPING
+# Characters in the Gujarati Unicode chart that haven't
+# been assigned in Bharati Braille
+gj_without_mapping = {
+    "ઌ", "ૐ", "ૡ", "ૢ", "ૣ", "૰", "૱"
+}
+
+#################################################
+# Devanagari Unicode to Bharati Braille Mapping #
+#################################################
+
+## VIRAMA
+# This is used for the "virama-reversal". See converter.py.
+dv_virama = "⠈"
+
+## SCHWA
+# This is used for the consonant-vowel idiosyncracy. See converter.py
+dv_schwa = "⠁"
+
+
+## VARIOUS SIGNS
+# Various signs added here as Unicode escape codes because several scripts
+# have the same signs, and they look very similar as well.
+# Done to ensure accuracy.
+dv_various_signs = {
+    "⠈": ("\u094D",), #Virama; it is repeated here because earlier no mapping is defined.
+    "⠂": ("\u093D",), # Avagraha (same mapping as comma?)
+    "⠄": ("\u0901",), # Chandra-bindu
+    "⠰": ("\u0902",), # Anusvara    
+    "⠠": ("\u0903",), # Visarga
+    "": ("\u093C",), # Nukta is being completely ignored (except for ड़ and ढ़)
+}
+
+## VOWELS AND VOWEL SIGNS
+# In Bharati Braille, each vowel and its corresponding vowel sign (or matra) is represented by the same Braille character.
+# If there is more than one devanagari character, make sure that the first is the vowel, and not the matra
+dv_vowels = {
+     # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign.
+     "⠁": ("अ",), # Letter A; This is repeated here because earlier no mapping is defined.
+     "⠜": ("आ", "ा" ), # Letter AA
+     "⠊": ("इ", "ि"), # Letter I
+     "⠔": ("ई", "ी"), # Letter II
+     "⠥": ("उ", "ु"), # Letter U
+     "⠳": ("ऊ", "ू"), # Letter UU
+     "⠐⠗": ("ऋ", "ृ"), # Letter Vocalic R
+     "⠠⠗": ("ॠ","ॄ"), # Letter Vocalic RR
+     "⠠⠇": ("ऌ","ॢ"), # Letter Vocalic L
+     "⠠⠇": ("ॡ","ॣ"), # Letter Vocalic LL
+     "⠢": ("ऍ", "ॅ"), # Letter Candra E
+    # ऎ and ॆ have no direct mapping in Bharati Braille.
+     "⠑": ("ए", "े",), # Letter E
+     "⠌": ("ऐ", "ै"), # Letter AI
+     "⠭": ("ऑ","ॉ"), # Letter Candra O
+    # ऒ and ॊ have no direct mapping in Bharati Braille.
+     "⠕": ("ओ", "ो"), # Letter O
+     "⠪": ("औ", "ौ"), # Letter AU
+} 
+
+## CONSONANTS
+dv_consonants = {
+    "⠅": ("क", "क़"), # Letter KA and QA
+     "⠨": ("ख", "ख़"), # Letter KHA and KHHA
+     "⠛": ("ग", "ग़"), # Letter GA and GHHA
+     "⠣": ("घ",), # Letter GHA
+     "⠬": ("ङ",), # Letter NGA
+     "⠉": ("च",), # Letter CA
+     "⠡": ("छ",), # Letter CHA
+     "⠚": ("ज", "ज़"), # Letter JA and ZA
+     "⠴": ("झ",), # Letter JHA
+     "⠒": ("ञ",), # Letter NYA
+     "⠾": ("ट",), # Letter TTA
+     "⠺": ("ठ",), # Letter TTHA
+     "⠫": ("ड",), # Letter DDA
+     "⠿": ("ढ",), # Letter DDHA
+     "⠼": ("ण",), # Letter NNA
+     "⠞": ("त",), # Letter TA
+     "⠹": ("थ",), # Letter THA
+     "⠙": ("द",), # Letter DA
+     "⠮": ("ध",), # Letter DHA
+     "⠝": ("न", "ऩ"), # Letter NA and NNNA
+     "⠏": ("प",), # Letter PA
+     "⠖": ("फ", "फ़"), # Letter PHA and FA
+     "⠃": ("ब",), # Letter BA
+     "⠘": ("भ",), # Letter BHA
+     "⠍": ("म",), # Letter MA
+     "⠽": ("य", "य़",), # Letter YA and YYA
+     "⠗": ("र", "ऱ"), # Letter RA and RRA
+     "⠇": ("ल",), # Letter LA
+     "⠸": ("ळ", "ऴ"), # Letter LLA and LLLA
+     "⠧": ("व",), # Letter VA
+     "⠩": ("श",), # Letter SHA
+     "⠯": ("ष",), # Letter SSA
+     "⠎": ("स",), # Letter SA
+     "⠓": ("ह",), # Letter HA
+# Nukta characters that have been assigned separate symbols in Braille
+     "⠻": ("ड़",), # Letter DDDHA
+     "⠐⠻": ("ढ़",), # Letter RHA
+}
+
+## AKHAND LIGATURES
+# Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
+# Some of these are represented as unique characters in Bharati Braille.
+# They must be converted first; otherwise we'll get an expanded form of these conjuncts in the Braille transcription.
+dv_akhand = {
     # क्ष = क + ् + ष
      "⠟": ("क्ष",),
     # ज्ञ = ज + ् + ञ
      "⠱": ("ज्ञ",),
 }
 
-# TODO: More numbers shit on pg 36
-# TODO: Fractions, pg 37
-# TODO: Number symbol when using math signs (pg 39)
-
-## Heuristics
-# Dumb (ASCII) quote detection?
-# Forward slash between numbers (and otherwise) should trigger a warning, and skip the word
-# Math symbols should trigger the math warning, and skip the equation
-# Unencoded devanagari characters should trigger an unknown warning, and skip the word
-# Unknown characters should trigger an unknown warning, and skip the word
 
 ## Devanagari characters that have no mapping.
 # This isn't used anywhere yet. It exists only for documentation.
 # Haven't reviewed these yet.
-_without_mapping = [
+dv_without_mapping = [
     # Characters which could be shoved somewhere else, just not sure where:
-    ("ऄ", "ऌ", "ॡ", "ॢ", "ॣ", "ॻ", "ॼ", "ॾ", "ॿ", "ॽ"),
+    ("ऄ", "ॻ", "ॼ", "ॾ", "ॿ", "ॽ"),
     # Characters without any mappings which can't be lumped anywhere else:
     ("ऀ", "ऺ", "ऻ", "़", "ॎ", "ॏ", "ॐ", "॑", "॒", "॓", "॔", "ॕ", "ॖ", "ॗ", "॰",
      "ॱ", "ॳ", "ॴ", "ॵ", "ॶ", "ॷ", "ॹ", "ॺ",),
