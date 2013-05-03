@@ -36,6 +36,10 @@ from mappings import dv_vowels, dv_consonants, dv_various_signs
 from mappings import gj_virama, gj_schwa
 from mappings import gj_akhand
 from mappings import gj_vowels, gj_consonants, gj_various_signs
+# Bengali mappings
+from mappings import bn_virama, bn_schwa
+from mappings import bn_akhand
+from mappings import bn_vowels, bn_consonants, bn_various_signs
 
 ######################
 # BEGIN COMMON GLYPH #
@@ -135,6 +139,40 @@ gj_to_bb_akhand = {}
 for (braille, devanagari_list) in gj_akhand.items():
     for each in devanagari_list:
         gj_to_bb_akhand[each] = braille
+
+##################
+# BEGIN BENGALI  #
+# PRE-PROCESSING #
+##################
+# Sets of all Bengali consonants, and vowel characters.
+# This list is used for the vowel idiosyncracy where 'अ' is placed explicitly 
+# if a consonant is followed by a vowel character (not a vowel sign [matra])
+# See: insert_explicit_schwa()
+all_bn_consonants = set()
+for each in bn_consonants, bn_akhand:
+    for value in each.values():
+        all_bn_consonants.update(value)
+bn_vowel_chars = set()
+for value in bn_vowels.values():
+    length = len(value)
+    # We assume here that the first value is a vowel char, the second is a
+    # vowel sign, and that there are no more than two values
+    if length == 2:
+        bn_vowel_chars.add(value[0])
+    elif length > 2:
+        raise Exception("Expected each Braille vowel to map from 2 Gujarati vowels, but it's mapping from more than 2?")
+
+# Reverse all the braille-to-devanagari mappings from mappings.py
+# We need a devanagari-to-bharati-braille mapping for each type of mapping
+bn_to_bb = {}
+for (braille, devanagari_list) in bn_vowels.items() | bn_consonants.items() | \
+                                  bn_various_signs.items():
+    for each in devanagari_list:
+        bn_to_bb[each] = braille
+bn_to_bb_akhand = {}
+for (braille, devanagari_list) in bn_akhand.items():
+    for each in devanagari_list:
+        bn_to_bb_akhand[each] = braille
 ######################
 # END PRE-PROCESSING #
 ######################
@@ -258,6 +296,27 @@ def convert_gujarati_to_braille(text, debug=False):
     if debug:
         print("After charset translation:\n"+new_text)
     new_text = virama_reversal(new_text, gj_virama, debug)
+    new_text = convert_common_glyphs_to_braille (new_text, debug)
+    warnings = append_warnings(new_text)
+    return (new_text, warnings)
+
+def convert_bengali_to_braille(text, debug=False):
+    """
+    Converts the given text from Bengali to Bharati Braille
+    Leaves unknown characters untouched
+    """
+    new_text = text[:]
+    new_text = insert_explicit_schwa(new_text, bn_schwa, all_bn_consonants,
+                                     bn_vowel_chars, debug)
+    # Do str.replace instead of str.maketrans for the string-to-char conversion
+    for (key, value) in bn_to_bb_akhand.items():
+        new_text = new_text.replace(key, value)
+    if debug:
+        print("After string-to-char conversion:\n"+new_text)
+    new_text = new_text.translate(str.maketrans(bn_to_bb))
+    if debug:
+        print("After charset translation:\n"+new_text)
+    new_text = virama_reversal(new_text, bn_virama, debug)
     new_text = convert_common_glyphs_to_braille (new_text, debug)
     warnings = append_warnings(new_text)
     return (new_text, warnings)
