@@ -17,7 +17,7 @@ import unittest
 if sys.version_info.major != 3:
     raise Exception("This program needs Python 3!")
 
-ACHARYA_DEVA_INPUT = \
+DV_ACHARYA_INPUT = \
 """वन्दे मातरं वन्दे मातरम्
 सुजलां सुफलां मलयज शीतलाम्
 शश्य श्यामलां मातरं वन्दे मातरम्।
@@ -26,7 +26,7 @@ ACHARYA_DEVA_INPUT = \
 सुहासिनीं सुमधुर भाषिनीम्
 सुखदां वरदां मातरं वन्दे मातरम्।"""
 
-ACHARYA_DEVA_OUTPUT = \
+DV_ACHARYA_OUTPUT = \
 """⠧⠈⠝⠙⠑ ⠍⠜⠞⠗⠰ ⠧⠈⠝⠙⠑ ⠍⠜⠞⠗⠈⠍
 ⠎⠥⠚⠇⠜⠰ ⠎⠥⠖⠇⠜⠰ ⠍⠇⠽⠚ ⠩⠔⠞⠇⠜⠈⠍
 ⠩⠈⠩⠽ ⠈⠩⠽⠜⠍⠇⠜⠰ ⠍⠜⠞⠗⠰ ⠧⠈⠝⠙⠑ ⠍⠜⠞⠗⠈⠍⠲
@@ -36,11 +36,11 @@ ACHARYA_DEVA_OUTPUT = \
 ⠎⠥⠨⠙⠜⠰ ⠧⠗⠙⠜⠰ ⠍⠜⠞⠗⠰ ⠧⠈⠝⠙⠑ ⠍⠜⠞⠗⠈⠍⠲"""
 
 # Test text from the Bharati Braille Shikshak
-SHIKSHAK_INPUT = \
+DV_SHIKSHAK_INPUT = \
 """(क) २६ जनवरी, ’13 को प्रातःकाल 6:15 बजे से गणतंत्र दिवस शुरू; और रात्रि 11:00 बजे ख़तम।
 (ख) उसने पुछा, “आप कौन हैं?!” मैंने कहा “पता नहीं…”"""
 
-SHIKSHAK_OUTPUT = \
+DV_SHIKSHAK_OUTPUT = \
 """⠶⠅⠶ ⠼⠃⠋ ⠚⠝⠧⠗⠔⠼⠂ ⠴⠄⠼⠁⠉ ⠅⠕ ⠈⠏⠗⠜⠞⠠⠅⠜⠇ ⠼⠋⠒⠼⠁⠑ ⠃⠚⠑ ⠎⠑ ⠛⠼⠞⠰⠈⠞⠗ ⠙⠊⠧⠎ ⠩⠥⠗⠳⠆ ⠪⠗ ⠗⠜⠈⠞⠗⠊ ⠼⠁⠁⠒⠼⠚⠚ ⠃⠚⠑ ⠨⠞⠍⠲
 ⠶⠨⠶ ⠥⠎⠝⠑ ⠏⠥⠡⠜⠼⠂ ⠦⠜⠏ ⠅⠪⠝ ⠓⠌⠰⠦⠖⠴ ⠍⠌⠰⠝⠑ ⠅⠓⠜ ⠦⠏⠞⠜ ⠝⠓⠔⠰⠠⠠⠠⠴"""
 
@@ -56,8 +56,8 @@ class TestDevanagari(unittest.TestCase):
 
     def test_virama_reversal(self):
         from converters import dv_virama, virama_reversal
-        VIRAMA_INPUT = ""
-        VIRAMA_OUTPUT = ""
+        VIRAMA_INPUT = "⠏⠈⠗"
+        VIRAMA_OUTPUT = "⠈⠏⠗"
         self.assertEqual(virama_reversal (VIRAMA_INPUT, dv_virama),
                          VIRAMA_OUTPUT)
 
@@ -77,13 +77,13 @@ class TestDevanagari(unittest.TestCase):
 
     def test_acharya_devanagari_conversion(self):
         from converters import convert_devanagari_to_braille
-        self.assertEqual(convert_devanagari_to_braille (ACHARYA_DEVA_INPUT)[0],
-                         ACHARYA_DEVA_OUTPUT)
+        self.assertEqual(convert_devanagari_to_braille (DV_ACHARYA_INPUT)[0],
+                         DV_ACHARYA_OUTPUT)
 
     def test_shikshak_conversion(self):
         from converters import convert_devanagari_to_braille
-        self.assertEqual(convert_devanagari_to_braille (SHIKSHAK_INPUT)[0],
-                         SHIKSHAK_OUTPUT)
+        self.assertEqual(convert_devanagari_to_braille (DV_SHIKSHAK_INPUT)[0],
+                         DV_SHIKSHAK_OUTPUT)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
