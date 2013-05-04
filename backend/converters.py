@@ -100,19 +100,24 @@ def virama_reversal(text):
     return re.sub(pattern, repl, text, flags=re.MULTILINE)
 
 def translate_math(text):
-    # Add number prefix for such numbers:
+    ## Add number prefix for such numbers:
     # 12876
     # 1,540,000
     # .5234
     # 2.8999
     # 8.8.8
-    # Also adds a prefix for such numbers:
+    ## Also adds a prefix for such numbers:
     # 5. (not a decimal)
     # 123, (not a number sequence)
     # ,999 (prefix inserted after the comma)
-    # Which matches precisely what we need.
-    pattern = r"(,?)([{0}.,]+)".format(''.join(number_chars))
-    repl = r"\1{0}\2".format(number_prefix)
+    ## Which matches precisely what we need.
+    #
+    ## Match something that:
+    ## * Is a number «[{0}]+»
+    ## * Number may start with a decimal point
+    ## * Number may contain commas and/or more decimal points.
+    pattern = r"(\.?[{0}]+[{0}\.,]*)".format(''.join(number_chars))
+    repl = r"{0}\1".format(number_prefix)
     text = re.sub(pattern, repl, text, flags=re.MULTILINE)
     # Translate commas for numbers such as: 1,500,000
     pattern = r"([{0}]+?){1}(?=[{0}]+?)".format(''.join(number_chars), ",")
