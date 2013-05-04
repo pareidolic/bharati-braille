@@ -37,11 +37,11 @@ DV_ACHARYA_OUTPUT = \
 
 # Test text from the Bharati Braille Shikshak
 DV_SHIKSHAK_INPUT = \
-"""(क) २६ जनवरी, ’13 को प्रातःकाल 6:15 बजे से गणतंत्र दिवस शुरू; और रात्रि 11:00 बजे ख़तम।
+"""(क) २६ जनवरी, ’13 को प्रातःकाल 6:15 बजे से राष्ट्र गणतंत्र दिवस शुरू; और रात्रि 11:00 बजे ख़तम।
 (ख) उसने पुछा, “आप कौन हैं?!” मैंने कहा “पता नहीं…”"""
 
 DV_SHIKSHAK_OUTPUT = \
-"""⠶⠅⠶ ⠼⠃⠋ ⠚⠝⠧⠗⠔⠼⠂ ⠴⠄⠼⠁⠉ ⠅⠕ ⠈⠏⠗⠜⠞⠠⠅⠜⠇ ⠼⠋⠒⠼⠁⠑ ⠃⠚⠑ ⠎⠑ ⠛⠼⠞⠰⠈⠞⠗ ⠙⠊⠧⠎ ⠩⠥⠗⠳⠆ ⠪⠗ ⠗⠜⠈⠞⠗⠊ ⠼⠁⠁⠒⠼⠚⠚ ⠃⠚⠑ ⠨⠞⠍⠲
+"""⠶⠅⠶ ⠼⠃⠋ ⠚⠝⠧⠗⠔⠼⠂ ⠴⠄⠼⠁⠉ ⠅⠕ ⠈⠏⠗⠜⠞⠠⠅⠜⠇ ⠼⠋⠒⠼⠁⠑ ⠃⠚⠑ ⠎⠑ ⠗⠜⠈⠯⠈⠾⠗ ⠛⠼⠞⠰⠈⠞⠗ ⠙⠊⠧⠎ ⠩⠥⠗⠳⠆ ⠪⠗ ⠗⠜⠈⠞⠗⠊ ⠼⠁⠁⠒⠼⠚⠚ ⠃⠚⠑ ⠨⠞⠍⠲
 ⠶⠨⠶ ⠥⠎⠝⠑ ⠏⠥⠡⠜⠼⠂ ⠦⠜⠏ ⠅⠪⠝ ⠓⠌⠰⠦⠖⠴ ⠍⠌⠰⠝⠑ ⠅⠓⠜ ⠦⠏⠞⠜ ⠝⠓⠔⠰⠠⠠⠠⠴"""
 
 class TestDevanagari(unittest.TestCase):
@@ -56,8 +56,8 @@ class TestDevanagari(unittest.TestCase):
 
     def test_virama_reversal(self):
         from converters import dv_virama, virama_reversal
-        VIRAMA_INPUT = "⠏⠈⠗"
-        VIRAMA_OUTPUT = "⠈⠏⠗"
+        VIRAMA_INPUT = "⠏⠈\n⠏⠈⠗\n⠏⠈⠗⠈⠞"
+        VIRAMA_OUTPUT = "⠈⠏\n⠈⠏⠗\n⠈⠏⠈⠗⠞"
         self.assertEqual(virama_reversal (VIRAMA_INPUT, dv_virama),
                          VIRAMA_OUTPUT)
 
@@ -75,7 +75,7 @@ class TestDevanagari(unittest.TestCase):
         self.assertEqual(convert_common_glyphs_to_braille (COMMON_INPUT),
                          COMMON_OUTPUT)
 
-    def test_acharya_devanagari_conversion(self):
+    def test_acharya_conversion(self):
         from converters import convert_devanagari_to_braille
         self.assertEqual(convert_devanagari_to_braille (DV_ACHARYA_INPUT)[0],
                          DV_ACHARYA_OUTPUT)
