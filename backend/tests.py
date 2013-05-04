@@ -41,12 +41,13 @@ DV_SHIKSHAK_INPUT = \
 (ख) उसने पुछा, “आप कौन हैं?!” मैंने कहा “पता नहीं…”"""
 
 DV_SHIKSHAK_OUTPUT = \
-"""⠶⠅⠶ ⠼⠃⠋ ⠚⠝⠧⠗⠔⠼⠂ ⠴⠄⠼⠁⠉ ⠅⠕ ⠈⠏⠗⠜⠞⠠⠅⠜⠇ ⠼⠋⠒⠼⠁⠑ ⠃⠚⠑ ⠎⠑ ⠗⠜⠈⠯⠈⠾⠗ ⠛⠼⠞⠰⠈⠞⠗ ⠙⠊⠧⠎ ⠩⠥⠗⠳⠆ ⠪⠗ ⠗⠜⠈⠞⠗⠊ ⠼⠁⠁⠒⠼⠚⠚ ⠃⠚⠑ ⠨⠞⠍⠲
-⠶⠨⠶ ⠥⠎⠝⠑ ⠏⠥⠡⠜⠼⠂ ⠦⠜⠏ ⠅⠪⠝ ⠓⠌⠰⠦⠖⠴ ⠍⠌⠰⠝⠑ ⠅⠓⠜ ⠦⠏⠞⠜ ⠝⠓⠔⠰⠠⠠⠠⠴"""
+"""⠶⠅⠶ ⠼⠃⠋ ⠚⠝⠧⠗⠔⠂ ⠴⠄⠼⠁⠉ ⠅⠕ ⠈⠏⠗⠜⠞⠠⠅⠜⠇ ⠼⠋⠒⠼⠁⠑ ⠃⠚⠑ ⠎⠑ ⠗⠜⠈⠯⠈⠾⠗ ⠛⠼⠞⠰⠈⠞⠗ ⠙⠊⠧⠎ ⠩⠥⠗⠳⠆ ⠪⠗ ⠗⠜⠈⠞⠗⠊ ⠼⠁⠁⠒⠼⠚⠚ ⠃⠚⠑ ⠨⠞⠍⠲
+⠶⠨⠶ ⠥⠎⠝⠑ ⠏⠥⠡⠜⠂ ⠦⠜⠏ ⠅⠪⠝ ⠓⠌⠰⠦⠖⠴ ⠍⠌⠰⠝⠑ ⠅⠓⠜ ⠦⠏⠞⠜ ⠝⠓⠔⠰⠠⠠⠠⠴"""
 
 class TestDevanagari(unittest.TestCase):
     def test_explicit_schwa(self):
-        from converters import dv_schwa, all_dv_consonants, dv_vowel_chars, insert_explicit_schwa
+        from converters import dv_schwa, all_dv_consonants, dv_vowel_chars
+        from converters import insert_explicit_schwa
         SCHWA_INPUT = "सईयाँ अनु बाई बम्बई"
         SCHWA_OUTPUT = "स⠁ईयाँ अनु बाई बम्ब⠁ई"
         self.assertEqual(insert_explicit_schwa (SCHWA_INPUT, dv_schwa,
@@ -70,8 +71,8 @@ class TestDevanagari(unittest.TestCase):
 
     def test_common_glyph_conversion(self):
         from converters import convert_common_glyphs_to_braille
-        COMMON_INPUT = "‐ - – —"
-        COMMON_OUTPUT = "⠤ ⠤ ⠤⠤ ⠤⠤⠤⠤"
+        COMMON_INPUT = "‐ - – — ... … , ; : । ॥ ! ? *"
+        COMMON_OUTPUT = "⠤ ⠤ ⠤⠤ ⠤⠤⠤⠤ ⠠⠠⠠ ⠠⠠⠠ ⠂ ⠆ ⠒ ⠲ ⠲⠲ ⠖ ⠦ ⠔⠔"
         self.assertEqual(convert_common_glyphs_to_braille (COMMON_INPUT),
                          COMMON_OUTPUT)
 
