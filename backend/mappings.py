@@ -157,7 +157,7 @@ bn_vowels = {
      "⠥": ("উ", "ু"), # Letter U
      "⠳": ("ঊ", "ূ"), # Letter UU
      "⠐⠗": ("ঋ", "ৃ"), # Letter Vocalic R
-     "⠠⠇": ("ঌ","ৢ"), # Letter Vocalic L
+     "⠐⠇": ("ঌ","ৢ"), # Letter Vocalic L
      "⠑": ("এ", "ে",), # Letter E
      "⠌": ("ঐ", "ৈ"), # Letter AI
      "⠕": ("ও", "ो"), # Letter O
@@ -358,7 +358,7 @@ dv_vowels = {
      "⠳": ("ऊ", "ू"), # Letter UU
      "⠐⠗": ("ऋ", "ृ"), # Letter Vocalic R
      "⠠⠗": ("ॠ","ॄ"), # Letter Vocalic RR
-     "⠠⠇": ("ऌ","ॢ"), # Letter Vocalic L
+     "⠐⠇": ("ऌ","ॢ"), # Letter Vocalic L
      "⠠⠇": ("ॡ","ॣ"), # Letter Vocalic LL
      "⠢": ("ऍ", "ॅ"), # Letter Candra E
     # ऎ and ॆ have no direct mapping in Bharati Braille.
