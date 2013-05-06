@@ -23,23 +23,27 @@ if sys.version_info.major != 3:
     raise Exception("This program needs Python 3!")
 
 # Characters common to all encodings
-from mappings import ellipsis, dashes, punctuation, paired_punctuation
-from mappings import numbers, number_prefix, math_punctuation
+from mappings.common import ellipsis, dashes, punctuation, paired_punctuation
+from mappings.common import numbers, number_prefix, math_punctuation
 # We warn when these are inputted
-from mappings import dumb_quotes, math_symbols
+from mappings.common import dumb_quotes, math_symbols
 
 # Devanagari mappings
-from mappings import dv_virama, dv_schwa
-from mappings import dv_akhand
-from mappings import dv_vowels, dv_consonants, dv_various_signs
+from mappings.dv import dv_virama, dv_schwa
+from mappings.dv import dv_akhand
+from mappings.dv import dv_vowels, dv_consonants, dv_various_signs
 # Gujarati mappings
-from mappings import gj_virama, gj_schwa
-from mappings import gj_akhand
-from mappings import gj_vowels, gj_consonants, gj_various_signs
+from mappings.gj import gj_virama, gj_schwa
+from mappings.gj import gj_akhand
+from mappings.gj import gj_vowels, gj_consonants, gj_various_signs
 # Bengali mappings
-from mappings import bn_virama, bn_schwa
-from mappings import bn_akhand
-from mappings import bn_vowels, bn_consonants, bn_various_signs
+from mappings.bn import bn_virama, bn_schwa
+from mappings.bn import bn_akhand
+from mappings.bn import bn_vowels, bn_consonants, bn_various_signs
+# Telugu mappings
+from mappings.tl import tl_virama, tl_schwa
+from mappings.tl import tl_akhand
+from mappings.tl import tl_vowels, tl_consonants, tl_various_signs
 
 ######################
 # BEGIN COMMON GLYPH #
@@ -173,6 +177,39 @@ bn_to_bb_akhand = {}
 for (braille, devanagari_list) in bn_akhand.items():
     for each in devanagari_list:
         bn_to_bb_akhand[each] = braille
+##################
+#  BEGIN TELUGU  #
+# PRE-PROCESSING #
+##################
+# Sets of all Telugu consonants, and vowel characters.
+# This list is used for the vowel idiosyncracy where 'अ' is placed explicitly 
+# if a consonant is followed by a vowel character (not a vowel sign [matra])
+# See: insert_explicit_schwa()
+all_tl_consonants = set()
+for each in tl_consonants, tl_akhand:
+    for value in each.values():
+        all_tl_consonants.update(value)
+tl_vowel_chars = set()
+for value in tl_vowels.values():
+    length = len(value)
+    # We assume here that the first value is a vowel char, the second is a
+    # vowel sign, and that there are no more than two values
+    if length == 2:
+        tl_vowel_chars.add(value[0])
+    elif length > 2:
+        raise Exception("Expected each Braille vowel to map from 2 Gujarati vowels, but it's mapping from more than 2?")
+
+# Reverse all the braille-to-devanagari mappings from mappings.py
+# We need a devanagari-to-bharati-braille mapping for each type of mapping
+tl_to_bb = {}
+for (braille, devanagari_list) in tl_vowels.items() | tl_consonants.items() | \
+                                  tl_various_signs.items():
+    for each in devanagari_list:
+        tl_to_bb[each] = braille
+tl_to_bb_akhand = {}
+for (braille, devanagari_list) in tl_akhand.items():
+    for each in devanagari_list:
+        tl_to_bb_akhand[each] = braille
 ######################
 # END PRE-PROCESSING #
 ######################
@@ -322,6 +359,27 @@ def convert_bengali_to_braille(text, debug=False):
     if debug:
         print("After charset translation:\n"+new_text)
     new_text = virama_reversal(new_text, bn_virama, debug)
+    new_text = convert_common_glyphs_to_braille (new_text, debug)
+    warnings = append_warnings(new_text)
+    return (new_text, warnings)
+
+def convert_telugu_to_braille(text, debug=False):
+    """
+    Converts the given text from Telugu to Bharati Braille
+    Leaves unknown characters untouched
+    """
+    new_text = text[:]
+    new_text = insert_explicit_schwa(new_text, tl_schwa, all_tl_consonants,
+                                     tl_vowel_chars, debug)
+    # Do str.replace instead of str.maketrans for the string-to-char conversion
+    for (key, value) in tl_to_bb_akhand.items():
+        new_text = new_text.replace(key, value)
+    if debug:
+        print("After string-to-char conversion:\n"+new_text)
+    new_text = new_text.translate(str.maketrans(tl_to_bb))
+    if debug:
+        print("After charset translation:\n"+new_text)
+    new_text = virama_reversal(new_text, tl_virama, debug)
     new_text = convert_common_glyphs_to_braille (new_text, debug)
     warnings = append_warnings(new_text)
     return (new_text, warnings)
