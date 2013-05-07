@@ -101,7 +101,12 @@ bn_consonants = {
      "⠯": ("ষ",), # Letter SSA
      "⠎": ("স",), # Letter SA
      "⠓": ("হ",), # Letter HA
-# Nukta characters that have been assigned separate symbols in Braille
+}
+
+# Nukta characters that have been assigned separate symbols in Braille, and are
+# composed from multiple unicode characters. These must be converted at the same
+# time as the Akhand ligatures.
+bn_nukta_glyphs = {
      "⠻": ("ড়",), # Letter RRA
      "⠐⠻": ("ঢ়",), # Letter RHA
      "⠢": ("য়",) # Letter YYA

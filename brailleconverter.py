@@ -2,7 +2,7 @@
 import sys
 
 from bottle import route, run, get, request, static_file, template
-from backend.converters import convert_devanagari_to_braille
+from backend.converters import convert_any_indic_to_braille
 
 if sys.version_info.major != 3:
     raise Exception("This program needs Python 3!")
@@ -11,7 +11,7 @@ if sys.version_info.major != 3:
 def index():
     input_text = request.forms.devanagari
 #    input_text = "कर अपनी शायरी की दुनिया में आ बैठा और तीन ही साल की मश्क़ ने मेरी कल्पना के जौहर खोल"
-    (braille, warnings) = convert_devanagari_to_braille(input_text)
+    (braille, warnings) = convert_any_indic_to_braille(input_text)
     return template("index", 
                     input_text=input_text,
                     braille=braille,

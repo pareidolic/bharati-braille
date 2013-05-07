@@ -28,17 +28,17 @@
 
 ## VIRAMA
 # This is used for the "virama-reversal". See converter.py.
-gj_virama = "⠈"
+gu_virama = "⠈"
 
 ## SCHWA
 # This is used for the consonant-vowel idiosyncracy. See converter.py
-gj_schwa = "⠁"
+gu_schwa = "⠁"
 
 ## VOWELS AND VOWEL SIGNS
 # Various signs added here as Unicode escape codes because several scripts
 # have the same signs, and they look very similar.
 # Done to ensure accuracy.
-gj_vowels = {
+gu_vowels = {
      "⠁": ("અ",), 
      "⠜": ("આ", "ા" ),
      "⠊": ("ઇ", "િ"),
@@ -56,7 +56,7 @@ gj_vowels = {
 } 
 
 ## CONSONANTS
-gj_consonants = {
+gu_consonants = {
     "⠅": ("ક",),
      "⠨": ("ખ",),
      "⠛": ("ગ",),
@@ -97,7 +97,7 @@ gj_consonants = {
 # Various signs added here as Unicode escape codes because several scripts
 # have the same signs, and they look very similar.
 # Done to ensure accuracy.
-gj_various_signs = {
+gu_various_signs = {
     "⠈": ("\u0ACD",), #Virama
     "⠂": ("\u0ABD",), # Avagraha (same mapping as comma?)
     "⠄": ("\u0A81",), # Chandra-bindu
@@ -110,7 +110,7 @@ gj_various_signs = {
 # Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
 # Some of these are represented as unique characters in Bharati Braille.
 # They must be converted first; otherwise we'll get an expanded form of these conjuncts in the Braille transcription.
-gj_akhand = {
+gu_akhand = {
     # ક્ષ = ક + ્ + ષ
      "⠟": ("ક્ષ",),
     # જ્ઞ = જ + ્ + ઞ
@@ -119,6 +119,6 @@ gj_akhand = {
 
 ## CHARACTERS THAT ARE NOT ASSIGNED IN BHARATI BRAILLE
 
-gj_without_mapping = {
+gu_without_mapping = {
     "ઌ", "ૐ", "ૡ", "ૢ", "ૣ", "૰", "૱"
 }

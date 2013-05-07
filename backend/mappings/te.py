@@ -28,31 +28,31 @@
 
 ## VIRAMA
 # This is used for the "virama-reversal". See converter.py.
-tl_virama = "⠈"
+te_virama = "⠈"
 
 
 ## SCHWA
 # This is used for the "consonant-vowel idiosyncracy". See converter.py
-tl_schwa = "⠁"
+te_schwa = "⠁"
 
 
 ## VARIOUS SIGNS
 # Various signs added here as Unicode escape codes because several scripts
 # have the same signs, and they look very similar.
 # Done to ensure accuracy.
-tl_various_signs = {
+te_various_signs = {
     "⠈": ("\u0C4D",), #Virama
     "": ("\u0C3D",), # Avagraha (same mapping as comma?), *Not assigned for Telugu*
     "⠄": ("\u0C01",), # Chandra-bindu
     "⠰": ("\u0C02",), # Anusvara    
-    "⠠": ("\0C03",), # Visarga
-    "": ("",), # There is no Nukta in Telugu
+    "⠠": ("\u0C03",), # Visarga
+    #"": ("",), # There is no Nukta in Telugu
 }
 
 ## VOWELS AND VOWEL SIGNS
 # In Bharati Braille, each vowel and its corresponding vowel sign (or matra) is represented by the same Braille character.
 # Always put the vowel first, matra second.
-tl_vowels = {
+te_vowels = {
      # The schwa vowel is inherent in every consonant, and does not have a separate vowel sign.
      "⠁": ("అ",), # Letter A
      "⠜": ("ఆ", "ా" ), # Letter AA
@@ -73,7 +73,7 @@ tl_vowels = {
 } 
 
 ## CONSONANTS
-tl_consonants = {
+te_consonants = {
      "⠅": ("క",), # Letter KA
      "⠨": ("ఖ",), # Letter KHA
      "⠛": ("గ",), # Letter GA
@@ -101,7 +101,7 @@ tl_consonants = {
      "⠍": ("మ",), # Letter MA
      "⠽": ("య",), # Letter YA
      "⠗": ("ర",), # Letter RA
-     "": ("",), # Letter RRA, not assigned in Bharati Braille
+     #"": ("",),  # Letter RRA, not assigned in Bharati Braille
      "⠇": ("ల",), # Letter LA
      "⠸": ("ళ",), # Letter LLA
      "⠧": ("వ",), # Letter VA
@@ -115,7 +115,7 @@ tl_consonants = {
 # Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
 # Some of these are represented as unique characters in Bharati Braille.
 # They must be converted first; otherwise we'll get an expanded form of these conjuncts in the Braille transcription.
-tl_akhand = {
+te_akhand = {
     # క్ష = క + ్ + ష
      "⠟": ("క్ష",), # Conjunct KSSA
 }
@@ -127,7 +127,7 @@ tl_akhand = {
 
 ## CHARACTERS THAT ARE NOT ASSIGNED IN BHARATI BRAILLE
 
-tl_without_mapping = [
+te_without_mapping = [
 
     # Letter RRA, length marks, historic phonetic variants, fractions and weights
     ("\u0C31", "\u0C55", "\u0C56", "\u0C58", "\u0C59", "\u0C78", "\u0C79", "\u0C7A", "\u0C7B", "\u0C7C", "\u0C7D", "\u0C7E","\u0C7F"),
