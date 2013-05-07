@@ -41,6 +41,9 @@ from mappings.bn import bn_vowels, bn_consonants, bn_various_signs
 # Telugu mappings
 from mappings.te import te_virama, te_schwa, te_akhand
 from mappings.te import te_vowels, te_consonants, te_various_signs
+# Tamil mappings
+from mappings.ta import ta_virama, ta_schwa, ta_akhand
+from mappings.ta import ta_vowels, ta_consonants, ta_various_signs
 
 BB_WARN_WRAPPER = """<p class="warning">{0}</p>\n"""
 BB_WARN_DUMB_QUOTES = BB_WARN_WRAPPER.format("""The convertor does not handle <a href="about.html#conv_limitations">dumb quotes</a>.""")
@@ -183,6 +186,11 @@ def convert_telugu_to_braille(text, debug=False):
                                     all_te_consonants, te_vowel_chars,
                                     te_to_bb, te_to_bb_akhand, debug)
 
+def convert_tamil_to_braille(text, debug=False):
+    return convert_indic_to_braille(text, ta_schwa, ta_virama,
+                                    all_ta_consonants, ta_vowel_chars,
+                                    ta_to_bb, ta_to_bb_akhand, debug)
+
 def _no_braille_converter_found(text, debug=False):
     if debug:
         print("No braille converter found for: {0}".format(text))
@@ -301,10 +309,15 @@ for (braille, devanagari_list) in math_punctuation.items():
  te_vowel_chars, te_to_bb, te_to_bb_akhand) = \
         _perform_mapping_pre_processing(te_consonants, te_vowels, te_akhand,
                                         {}, te_various_signs)
+(all_ta_consonants, all_ta_consonants_and_vowels,
+ ta_vowel_chars, ta_to_bb, ta_to_bb_akhand) = \
+        _perform_mapping_pre_processing(ta_consonants, ta_vowels, ta_akhand,
+                                        {}, ta_various_signs)
 converters = {all_dv_consonants_and_vowels: convert_devanagari_to_braille,
               all_gu_consonants_and_vowels: convert_gujarati_to_braille,
               all_bn_consonants_and_vowels: convert_bengali_to_braille,
-              all_te_consonants_and_vowels: convert_telugu_to_braille,}
+              all_te_consonants_and_vowels: convert_telugu_to_braille,
+              all_ta_consonants_and_vowels: convert_tamil_to_braille,}
 ######################
 # END PRE-PROCESSING #
 ######################

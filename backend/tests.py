@@ -119,6 +119,7 @@ class TestBengali(unittest.TestCase):
                          "ADD TEST STRING HERE")
 
 class TestTelugu(unittest.TestCase):
+    # TODO: Use Telugu here and implement everything else
     def test_virama_reversal(self):
         from converters import te_virama, virama_reversal
         VIRAMA_INPUT = "⠏⠈\n⠏⠈⠗\n⠏⠈⠗⠈⠞"
@@ -129,6 +130,20 @@ class TestTelugu(unittest.TestCase):
     def test_comprehensive_conversion(self):
         from converters import convert_telugu_to_braille
         self.assertEqual(convert_telugu_to_braille ("ADD TEST STRING HERE")[0],
+                         "ADD TEST STRING HERE")
+
+class TestTamil(unittest.TestCase):
+    # TODO: Use Tamil here and implement everything else
+    def test_virama_reversal(self):
+        from converters import ta_virama, virama_reversal
+        VIRAMA_INPUT = "⠏⠈\n⠏⠈⠗\n⠏⠈⠗⠈⠞"
+        VIRAMA_OUTPUT = "⠈⠏\n⠈⠏⠗\n⠈⠏⠈⠗⠞"
+        self.assertEqual(virama_reversal (VIRAMA_INPUT, ta_virama),
+                         VIRAMA_OUTPUT)
+
+    def test_comprehensive_conversion(self):
+        from converters import convert_tamil_to_braille
+        self.assertEqual(convert_tamil_to_braille ("ADD TEST STRING HERE")[0],
                          "ADD TEST STRING HERE")
 
 class TestAutodetectConverter(unittest.TestCase):
@@ -168,6 +183,13 @@ class TestAutodetectConverter(unittest.TestCase):
     def test_telugu_detected(self):
         from converters import convert_any_indic_to_braille
         input_text = "తెలుగు"
+        (text, warnings) = convert_any_indic_to_braille(input_text)
+        self.assertEqual(warnings, "")
+        self.assertNotEqual(text, input_text)
+
+    def test_tamil_detected(self):
+        from converters import convert_any_indic_to_braille
+        input_text = "தமிழ்"
         (text, warnings) = convert_any_indic_to_braille(input_text)
         self.assertEqual(warnings, "")
         self.assertNotEqual(text, input_text)
