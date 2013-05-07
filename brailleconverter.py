@@ -10,8 +10,9 @@ if sys.version_info.major != 3:
 @route("/", method=["POST", "GET"])
 def index():
     input_text = request.forms.devanagari
-#    input_text = "कर अपनी शायरी की दुनिया में आ बैठा और तीन ही साल की मश्क़ ने मेरी कल्पना के जौहर खोल"
-    (braille, warnings) = convert_any_indic_to_braille(input_text)
+    (braille, warnings) = ("", "")
+    if input_text:
+        (braille, warnings) = convert_any_indic_to_braille(input_text)
     return template("index", 
                     input_text=input_text,
                     braille=braille,
