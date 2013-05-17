@@ -132,8 +132,6 @@ def append_warnings(text):
         warnings += BB_WARN_WRAPPER.format(BB_WARN_DUMB_QUOTES)
     if text_set.intersection(all_math_symbols):
         warnings += BB_WARN_WRAPPER.format(BB_WARN_MATH_OPS)
-    if warnings:
-        warnings += "<br/>"
     return warnings
 
 def convert_indic_to_braille(text, schwa, virama, all_consonants,

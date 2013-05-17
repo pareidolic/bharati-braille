@@ -150,6 +150,7 @@ a {
     padding-top: 5%;
     padding-bottom: 5%;
     min-height: 300px;
+    white-space: pre;
 
     border-bottom-style: solid;
     border-bottom-color: #c0c0c0;
