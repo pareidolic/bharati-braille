@@ -106,6 +106,17 @@ gu_various_signs = {
     "": ("\u0ABC",), # No Braille cell assigned for Gujarati Nukta
 }
 
+
+## COMPOSITE LETTERS
+# Letters that can also be composed from multiple unicode characters; usually by
+# combining a nukta with the base letter. These must be converted at the same 
+# time as the Akhand ligatures.
+# These are different from Akhand ligatures in that these can also be
+# represented by a single unicode point. See the list of consonants above.
+gu_composite_letters = {
+    # No Gujarati composite characters
+}
+
 ## AKHAND LIGATURES
 # Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
 # Some of these are represented as unique characters in Bharati Braille.

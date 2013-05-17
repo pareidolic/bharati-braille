@@ -3,7 +3,8 @@
 # vim: set sts=4 sw=4 et :
 
 # Authors:
-#  Pooja Saxena <anexasajoop@gmail.com>  
+#  Pooja Saxena <anexasajoop@gmail.com> 
+#  Nirbheek Chauhan <nirbheek.chauhan@gmail.com>
 
 # License:
 #  AGPL-3
@@ -62,11 +63,13 @@ bn_vowels = {
      "⠐⠇": ("ঌ","ৢ"), # Letter Vocalic L
      "⠑": ("এ", "ে",), # Letter E
      "⠌": ("ঐ", "ৈ"), # Letter AI
-     "⠕": ("ও", "ो"), # Letter O
-     "⠪": ("ঔ", "ौ"), # Letter AU
+     "⠕": ("ও", "ো"), # Letter O
+     "⠪": ("ঔ", "ৌ"), # Letter AU
 } 
 
 ## CONSONANTS
+# The consonant must always be a single unicode code; not composed from multiple
+# unicode codes.
 bn_consonants = {
      "⠅": ("ক",), # Letter KA
      "⠨": ("খ",), # Letter KHA
@@ -101,16 +104,27 @@ bn_consonants = {
      "⠯": ("ষ",), # Letter SSA
      "⠎": ("স",), # Letter SA
      "⠓": ("হ",), # Letter HA
+# Nukta letters that have been assigned separate symbols in Braille
+     "⠻": ("ড়",), # Letter RRA seems to be mapped in the NAB Braille Shikshak as
+                  # the Bengali equivalent of ड़ which is the letter DDDHA.
+                  # This needs to be double-checked.
+     "⠐⠻": ("ঢ়",), # Letter RHA
+     "⠢": ("য়",) # Letter YYA
 }
 
-# Nukta characters that have been assigned separate symbols in Braille, and are
-# composed from multiple unicode characters. These must be converted at the same
+
+## COMPOSITE LETTERS
+# Letters that can also be composed from multiple unicode characters; usually by
+# combining a nukta with the base letter. These must be converted at the same 
 # time as the Akhand ligatures.
-bn_nukta_glyphs = {
-     "⠻": ("ড়",), # Letter RRA
-     "⠐⠻": ("ঢ়",), # Letter RHA
-     "⠢": ("য়",) # Letter YYA
+# These are different from Akhand ligatures in that these can also be
+# represented by a single unicode point. See the list of consonants above.
+bn_composite_letters = {
+     "⠻": ("\u09A1\u09BC",), #  Letter RRA
+     "⠐⠻": ("\u09A2\u09BC",), # Letter RHA
+     "⠢": ("\u09AF\u09BC",) # Letter YYA
 }
+
 
 ## AKHAND LIGATURES
 # Akhand ligatures are consonantal ligatures that have a distinct visual form that may not contain the base forms.
@@ -131,7 +145,6 @@ bn_akhand = {
 ## CHARACTERS THAT ARE NOT ASSIGNED IN BHARATI BRAILLE
 
 bn_without_mapping = [
-
     # Bengali nukta, Letter KHANDA TA, length mark, additions for Assamese, currency signs, historical symbols for fractions, other historic signs
     ("়", "ৎ", "ৗ", "ৰ", "ৱ", "৲", "৳", "৴", "৵", "৶", "৷", "৸", "৹", "৺", "৻",),
 ]

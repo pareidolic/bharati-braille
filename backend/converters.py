@@ -30,13 +30,13 @@ from mappings.common import numbers, number_prefix, math_punctuation
 from mappings.common import dumb_quotes, math_symbols
 
 # Devanagari mappings
-from mappings.dv import dv_virama, dv_schwa, dv_akhand
+from mappings.dv import dv_virama, dv_schwa, dv_composite_letters, dv_akhand
 from mappings.dv import dv_vowels, dv_consonants, dv_various_signs
 # Gujarati mappings
-from mappings.gu import gu_virama, gu_schwa, gu_akhand
+from mappings.gu import gu_virama, gu_schwa, gu_composite_letters, gu_akhand
 from mappings.gu import gu_vowels, gu_consonants, gu_various_signs
 # Bengali mappings
-from mappings.bn import bn_virama, bn_schwa, bn_akhand, bn_nukta_glyphs
+from mappings.bn import bn_virama, bn_schwa, bn_composite_letters, bn_akhand
 from mappings.bn import bn_vowels, bn_consonants, bn_various_signs
 # Telugu mappings
 from mappings.te import te_virama, te_schwa, te_akhand
@@ -111,7 +111,7 @@ def translate_math(text, debug=False):
     # Translate numbers to braille characters without adding a number prefix
     text = text.translate(str.maketrans(cm_to_bb_numbers))
     if debug:
-        print("After math translation:\n"+new_text)
+        print("After math translation:\n"+text)
     return text
 
 def convert_common_glyphs_to_braille(text, debug=False):
@@ -137,7 +137,7 @@ def append_warnings(text):
     return warnings
 
 def convert_indic_to_braille(text, schwa, virama, all_consonants,
-                             vowel_chars, indic_to_bb, indic_to_bb_akhand,
+                             vowel_chars, indic_to_bb, indic_to_bb_composite,
                              debug=False):
     """
     Converts the given text from the given Indic language to Bharati Braille
@@ -154,7 +154,7 @@ def convert_indic_to_braille(text, schwa, virama, all_consonants,
     new_text = insert_explicit_schwa(new_text, schwa, all_consonants,
                                      vowel_chars, debug)
     # Do str.replace instead of str.maketrans for the string-to-char conversion
-    for (key, value) in indic_to_bb_akhand.items():
+    for (key, value) in indic_to_bb_composite.items():
         new_text = new_text.replace(key, value)
     if debug:
         print("After string-to-char conversion:\n"+new_text)
@@ -169,27 +169,27 @@ def convert_indic_to_braille(text, schwa, virama, all_consonants,
 def convert_devanagari_to_braille(text, debug=False):
     return convert_indic_to_braille(text, dv_schwa, dv_virama,
                                     all_dv_consonants, dv_vowel_chars,
-                                    dv_to_bb, dv_to_bb_akhand, debug)
+                                    dv_to_bb, dv_to_bb_composite, debug)
 
 def convert_gujarati_to_braille(text, debug=False):
     return convert_indic_to_braille(text, gu_schwa, gu_virama,
                                     all_gu_consonants, gu_vowel_chars,
-                                    gu_to_bb, gu_to_bb_akhand, debug)
+                                    gu_to_bb, gu_to_bb_composite, debug)
 
 def convert_bengali_to_braille(text, debug=False):
     return convert_indic_to_braille(text, bn_schwa, bn_virama,
                                     all_bn_consonants, bn_vowel_chars,
-                                    bn_to_bb, bn_to_bb_akhand, debug)
+                                    bn_to_bb, bn_to_bb_composite, debug)
 
 def convert_telugu_to_braille(text, debug=False):
     return convert_indic_to_braille(text, te_schwa, te_virama,
                                     all_te_consonants, te_vowel_chars,
-                                    te_to_bb, te_to_bb_akhand, debug)
+                                    te_to_bb, te_to_bb_composite, debug)
 
 def convert_tamil_to_braille(text, debug=False):
     return convert_indic_to_braille(text, ta_schwa, ta_virama,
                                     all_ta_consonants, ta_vowel_chars,
-                                    ta_to_bb, ta_to_bb_akhand, debug)
+                                    ta_to_bb, ta_to_bb_composite, debug)
 
 def _no_braille_converter_found(text, debug=False):
     if debug:
@@ -219,9 +219,9 @@ def convert_any_indic_to_braille(text, debug=False):
             indic_converter = converter
     if not indic_converter:
         indic_converter = _no_braille_converter_found
-    return indic_converter(text)
+    return indic_converter(text, debug)
 
-def _perform_mapping_pre_processing(consonants, vowels, akhand, nukta_glyphs, various_signs):
+def _perform_mapping_pre_processing(consonants, vowels, akhand, composite_letters, various_signs):
     """
     Sets of all consonants and vowel *characters* (not maatras).
     This list is used for the vowel idiosyncracy where 'LETTER A' is placed 
@@ -230,7 +230,7 @@ def _perform_mapping_pre_processing(consonants, vowels, akhand, nukta_glyphs, va
     See: insert_explicit_schwa()
     """
     all_consonants = set()
-    for each in consonants, akhand, nukta_glyphs:
+    for each in consonants, akhand, composite_letters:
         for value in each.values():
             all_consonants.update(value)
     vowel_chars = set()
@@ -251,12 +251,12 @@ def _perform_mapping_pre_processing(consonants, vowels, akhand, nukta_glyphs, va
                                  various_signs.items() | dashes.items():
         for each in indic_list:
             indic_to_bb[each] = braille
-    indic_to_bb_akhand = {}
-    for (braille, devanagari_list) in akhand.items() | nukta_glyphs.items():
+    indic_to_bb_composite = {}
+    for (braille, devanagari_list) in akhand.items() | composite_letters.items():
         for each in devanagari_list:
-            indic_to_bb_akhand[each] = braille
+            indic_to_bb_composite[each] = braille
     return (all_consonants, frozenset(all_consonants_and_vowels), 
-            vowel_chars, indic_to_bb, indic_to_bb_akhand)
+            vowel_chars, indic_to_bb, indic_to_bb_composite)
 
 ######################
 # BEGIN COMMON GLYPH #
@@ -294,23 +294,23 @@ for (braille, devanagari_list) in math_punctuation.items():
 #  PRE-PROCESSING  #
 ####################
 (all_dv_consonants, all_dv_consonants_and_vowels,
- dv_vowel_chars, dv_to_bb, dv_to_bb_akhand) = \
+ dv_vowel_chars, dv_to_bb, dv_to_bb_composite) = \
         _perform_mapping_pre_processing(dv_consonants, dv_vowels, dv_akhand,
-                                        {}, dv_various_signs)
+                                        dv_composite_letters, dv_various_signs)
 (all_gu_consonants, all_gu_consonants_and_vowels,
- gu_vowel_chars, gu_to_bb, gu_to_bb_akhand) = \
+ gu_vowel_chars, gu_to_bb, gu_to_bb_composite) = \
         _perform_mapping_pre_processing(gu_consonants, gu_vowels, gu_akhand,
-                                        {}, gu_various_signs)
+                                        gu_composite_letters, gu_various_signs)
 (all_bn_consonants, all_bn_consonants_and_vowels,
- bn_vowel_chars, bn_to_bb, bn_to_bb_akhand) = \
+ bn_vowel_chars, bn_to_bb, bn_to_bb_composite) = \
         _perform_mapping_pre_processing(bn_consonants, bn_vowels, bn_akhand, 
-                                        bn_nukta_glyphs,bn_various_signs)
+                                        bn_composite_letters, bn_various_signs)
 (all_te_consonants, all_te_consonants_and_vowels,
- te_vowel_chars, te_to_bb, te_to_bb_akhand) = \
+ te_vowel_chars, te_to_bb, te_to_bb_composite) = \
         _perform_mapping_pre_processing(te_consonants, te_vowels, te_akhand,
                                         {}, te_various_signs)
 (all_ta_consonants, all_ta_consonants_and_vowels,
- ta_vowel_chars, ta_to_bb, ta_to_bb_akhand) = \
+ ta_vowel_chars, ta_to_bb, ta_to_bb_composite) = \
         _perform_mapping_pre_processing(ta_consonants, ta_vowels, ta_akhand,
                                         {}, ta_various_signs)
 converters = {all_dv_consonants_and_vowels: convert_devanagari_to_braille,

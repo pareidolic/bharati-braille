@@ -90,6 +90,13 @@ class TestDevanagari(unittest.TestCase):
         self.assertEqual(convert_devanagari_to_braille(DV_SHIKSHAK_INPUT)[0],
                          DV_SHIKSHAK_OUTPUT)
 
+    def test_composite_conversion(self):
+        from converters import convert_devanagari_to_braille
+        COMPOSITE_INPUT = "ढ़िमफ़ोऩुड़"
+        COMPOSITE_OUTPUT = "⠐⠻⠊⠍⠖⠕⠝⠥⠻"
+        self.assertEqual(convert_devanagari_to_braille(COMPOSITE_INPUT)[0],
+                         COMPOSITE_OUTPUT)
+
 class TestGujarati(unittest.TestCase):
     # TODO: Use Gujarati here and implement everything else
     def test_virama_reversal(self):
@@ -115,8 +122,18 @@ class TestBengali(unittest.TestCase):
 
     def test_comprehensive_conversion(self):
         from converters import convert_bengali_to_braille
-        self.assertEqual(convert_bengali_to_braille("ADD TEST STRING HERE")[0],
-                         "ADD TEST STRING HERE")
+        # TODO: Make this string more comprehensive
+        BN_INPUT = "মুখোপাধ্যায়"
+        BN_OUTPUT = "⠍⠥⠨⠕⠏⠜⠈⠮⠽⠜⠢"
+        self.assertEqual(convert_bengali_to_braille(BN_INPUT)[0],
+                         BN_OUTPUT)
+
+    def test_composite_conversion(self):
+        from converters import convert_bengali_to_braille
+        COMPOSITE_INPUT = "ড়িঢ়য়াক"
+        COMPOSITE_OUTPUT = "⠻⠊⠐⠻⠢⠜⠅"
+        self.assertEqual(convert_bengali_to_braille(COMPOSITE_INPUT)[0],
+                         COMPOSITE_OUTPUT)
 
 class TestTelugu(unittest.TestCase):
     # TODO: Use Telugu here and implement everything else

@@ -78,9 +78,11 @@ dv_vowels = {
 
 
 ## CONSONANTS
+# The consonant must always be a single unicode code; not composed from multiple
+# unicode codes.
 # Those nukta characters with no special cell assigned are being collapsed with their base letter
 dv_consonants = {
-    "⠅": ("क", "क़"), # Letter KA and QA
+     "⠅": ("क", "क़"), # Letter KA and QA
      "⠨": ("ख", "ख़"), # Letter KHA and KHHA
      "⠛": ("ग", "ग़"), # Letter GA and GHHA
      "⠣": ("घ",), # Letter GHA
@@ -114,9 +116,30 @@ dv_consonants = {
      "⠯": ("ष",), # Letter SSA
      "⠎": ("स",), # Letter SA
      "⠓": ("ह",), # Letter HA
-# Nukta characters that have been assigned separate symbols in Braille
+# Nukta letters that have been assigned separate symbols in Braille
      "⠻": ("ड़",), # Letter DDDHA
      "⠐⠻": ("ढ़",), # Letter RHA
+}
+
+
+## COMPOSITE LETTERS
+# Letters that can also be composed from multiple unicode characters; usually by
+# combining a nukta with the base letter. These must be converted at the same 
+# time as the Akhand ligatures.
+# These are different from Akhand ligatures in that these can also be
+# represented by a single unicode point. See the list of consonants above.
+dv_composite_letters = {
+     "⠅": ("\u0915\u093C",), # Letter QA
+     "⠨": ("\u0916\u093C",), # Letter KHHA
+     "⠛": ("\u0917\u093C",), # Letter GHHA
+     "⠚": ("\u091C\u093C",), # Letter ZA
+     "⠻": ("\u0921\u093C",), # Letter DDDHA
+     "⠐⠻": ("\u0922\u093C",), # Letter RHA
+     "⠝": ("\u0928\u093C",), # Letter NNNA
+     "⠖": ("\u092B\u093C",), # Letter FA
+     "⠽": ("\u092F\u093C",), # Letter YYA
+     "⠗": ("\u0930\u093C",), # Letter RRA
+     "⠸": ("\u0933\u093C",), # Letter LLLA
 }
 
 
