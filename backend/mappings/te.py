@@ -61,9 +61,9 @@ te_vowels = {
      "⠥": ("ఉ", "ు"), # Letter U
      "⠳": ("ఊ", "ూ"), # Letter UU
      "⠐⠗": ("ఋ", "ృ"), # Letter Vocalic R, 
-     "⠠⠗": ("ౠ","ౄ"), # Letter Vocalic RR
-     "⠐⠇": ("ఌ","\u0C62"), # Letter Vocalic L, *Couldn't copy vowel sign, pasted unicode escape code instead*
-     "⠠⠇": ("ౡ","\u0C63"), # Letter Vocalic LL *Couldn't copy vowel sign, pasted unicode escape code instead*
+     "⠠⠗": ("ౠ", "ౄ"), # Letter Vocalic RR
+     "⠐⠇": ("ఌ", "ౢ"), # Letter Vocalic L
+     "⠠⠇": ("ౡ", "ౣ"), # Letter Vocalic LL
      "⠢": ("ఎ","ె"), # Letter E
      "⠑": ("ఏ","ే"), # Letter EE
      "⠌": ("ఐ","ై"), # Letter AI
@@ -101,7 +101,9 @@ te_consonants = {
      "⠍": ("మ",), # Letter MA
      "⠽": ("య",), # Letter YA
      "⠗": ("ర",), # Letter RA
-     #"": ("",),  # Letter RRA, not assigned in Bharati Braille
+     "⠻": ("ఱ",), # Letter RRA seems to be mapped in the NAB Braille Shikshak as
+                  # the Telugu equivalent of ड़ which is the letter DDDHA.
+                  # This needs to be double-checked.
      "⠇": ("ల",), # Letter LA
      "⠸": ("ళ",), # Letter LLA
      "⠧": ("వ",), # Letter VA
@@ -109,6 +111,17 @@ te_consonants = {
      "⠯": ("ష",), # Letter SSA
      "⠎": ("స",), # Letter SA
      "⠓": ("హ",), # Letter HA
+}
+
+
+## COMPOSITE LETTERS
+# Letters that can also be composed from multiple unicode characters; usually by
+# combining a nukta with the base letter. These must be converted at the same 
+# time as the Akhand ligatures.
+# These are different from Akhand ligatures in that these can also be
+# represented by a single unicode point. See the list of consonants above.
+te_composite_letters = {
+     # No nukta, and no composite characters for Telugu
 }
 
 ## AKHAND LIGATURES
@@ -120,6 +133,7 @@ te_akhand = {
      "⠟": ("క్ష",), # Conjunct KSSA
 }
 
+
 ## CHARACTERS MISSING IN UNICODE CHART
 # Couldn't find the Telugu equivalent of ड़ in the Unicode, it is assigned a cell in Bharati Braille
 # See Bharati Braille Shikshak, p79.
@@ -128,7 +142,6 @@ te_akhand = {
 ## CHARACTERS THAT ARE NOT ASSIGNED IN BHARATI BRAILLE
 
 te_without_mapping = [
-
-    # Letter RRA, length marks, historic phonetic variants, fractions and weights
-    ("\u0C31", "\u0C55", "\u0C56", "\u0C58", "\u0C59", "\u0C78", "\u0C79", "\u0C7A", "\u0C7B", "\u0C7C", "\u0C7D", "\u0C7E","\u0C7F"),
+    # length marks, historic phonetic variants, fractions and weights
+    ("\u0C55", "\u0C56", "\u0C58", "\u0C59", "\u0C78", "\u0C79", "\u0C7A", "\u0C7B", "\u0C7C", "\u0C7D", "\u0C7E","\u0C7F"),
 ]
