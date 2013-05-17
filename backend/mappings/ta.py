@@ -66,7 +66,7 @@ ta_consonants = {
     "⠼": ("ண",), # Letter NNA
     "⠞": ("த",), # Letter TA
     "⠝": ("ந",), # Letter NA
-    "": ("ன",), # Letter NNA, not assigned in NAB Bharati Braille
+    #"": ("ன",), # Letter NNA, not assigned in NAB Bharati Braille
     "⠏": ("ப",), # Letter PA
     "⠍": ("ம",), # Letter MA
     "⠽": ("ய",), # Letter YA
@@ -76,7 +76,7 @@ ta_consonants = {
     "⠸": ("ள",), # Letter LLA
     "⠷": ("ழ",), # Letter LLLA
     "⠧": ("வ",), # Letter VA
-    "": ("ஶ",), # Letter SHA, not assigned in NAB Bharati Braille
+    #"": ("ஶ",), # Letter SHA, not assigned in NAB Bharati Braille
     "⠯": ("ஷ",), # Letter SSA
     "⠎": ("ஸ",), # Letter SA
     "⠓": ("ஹ",), # Letter HA
@@ -84,11 +84,22 @@ ta_consonants = {
 
 
 ## VARIOUS SIGNS
-#Tamil doesn't use anusvara, but it is encoded in Unicode
+# Tamil doesn't use anusvara, but it is encoded in Unicode
 ta_various_signs = {
     "⠈": ("்",), # Virama, because there is no mapping earlier
     "⠰": ("ௗ",), # Length AU Mark
     "⠠": ("ஃ",), # Visarga
+}
+
+
+## COMPOSITE LETTERS
+# Letters that can also be composed from multiple unicode characters; usually by
+# combining a nukta with the base letter. These must be converted at the same 
+# time as the Akhand ligatures.
+# These are different from Akhand ligatures in that these can also be
+# represented by a single unicode point. See the list of consonants above.
+ta_composite_letters = {
+    # No nukta and no composite characters for Tamil
 }
 
 
