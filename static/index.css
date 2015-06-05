@@ -18,7 +18,7 @@ body {
 }
 
 h1 {
-    font-family: Century Schoolbook, Georgia, serif;
+    font-family: Georgia, Century Schoolbook, Century Schoolbook L, serif;
     color: #000;
     font-style: normal;
     font-weight: 100;
@@ -26,7 +26,7 @@ h1 {
 }
 
 h2 {
-    font-family: Century Schoolbook, Georgia, serif;
+    font-family: Georgia, Century Schoolbook, Century Schoolbook L, serif;
     color: #000;
     font-style: italic;
     font-weight: 100;
