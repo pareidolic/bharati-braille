@@ -24,26 +24,26 @@ if sys.version_info.major != 3:
     raise Exception("This program needs Python 3!")
 
 # Characters common to all encodings
-from mappings.common import ellipsis, dashes, punctuation, paired_punctuation
-from mappings.common import numbers, number_prefix, math_punctuation
+from .mappings.common import ellipsis, dashes, punctuation, paired_punctuation
+from .mappings.common import numbers, number_prefix, math_punctuation
 # We warn when these are inputted
-from mappings.common import dumb_quotes, math_symbols
+from .mappings.common import dumb_quotes, math_symbols
 
 # Devanagari mappings
-from mappings.dv import dv_virama, dv_schwa, dv_composite_letters, dv_akhand
-from mappings.dv import dv_vowels, dv_consonants, dv_various_signs
+from .mappings.dv import dv_virama, dv_schwa, dv_composite_letters, dv_akhand
+from .mappings.dv import dv_vowels, dv_consonants, dv_various_signs
 # Gujarati mappings
-from mappings.gu import gu_virama, gu_schwa, gu_composite_letters, gu_akhand
-from mappings.gu import gu_vowels, gu_consonants, gu_various_signs
+from .mappings.gu import gu_virama, gu_schwa, gu_composite_letters, gu_akhand
+from .mappings.gu import gu_vowels, gu_consonants, gu_various_signs
 # Bengali mappings
-from mappings.bn import bn_virama, bn_schwa, bn_composite_letters, bn_akhand
-from mappings.bn import bn_vowels, bn_consonants, bn_various_signs
+from .mappings.bn import bn_virama, bn_schwa, bn_composite_letters, bn_akhand
+from .mappings.bn import bn_vowels, bn_consonants, bn_various_signs
 # Telugu mappings
-from mappings.te import te_virama, te_schwa, te_akhand
-from mappings.te import te_vowels, te_consonants, te_various_signs
+from .mappings.te import te_virama, te_schwa, te_akhand
+from .mappings.te import te_vowels, te_consonants, te_various_signs
 # Tamil mappings
-from mappings.ta import ta_virama, ta_schwa, ta_akhand
-from mappings.ta import ta_vowels, ta_consonants, ta_various_signs
+from .mappings.ta import ta_virama, ta_schwa, ta_akhand
+from .mappings.ta import ta_vowels, ta_consonants, ta_various_signs
 
 BB_WARN_WRAPPER = """<p class="warning">{0}</p>\n"""
 BB_WARN_DUMB_QUOTES = BB_WARN_WRAPPER.format("""The convertor does not handle <a href="about.html#conv_limitations">dumb quotes</a>.""")
