@@ -35,7 +35,7 @@ if __name__ == '__main__':
     if _cmd_options.server and _cmd_options.server.startswith('gevent'):
         import gevent.monkey; gevent.monkey.patch_all()
 
-import base64, cgi, email.utils, functools, hmac, imp, itertools, mimetypes,\
+import base64, cgi, email.utils, functools, hmac, types, itertools, mimetypes,\
         os, re, subprocess, sys, tempfile, threading, time, urllib, warnings
 
 from datetime import date as datedate, datetime, timedelta
@@ -81,7 +81,7 @@ if py3k:
     from urllib.parse import urlencode, quote as urlquote, unquote as urlunquote
     urlunquote = functools.partial(urlunquote, encoding='latin1')
     from http.cookies import SimpleCookie
-    from collections import MutableMapping as DictMixin
+    from collections.abc import MutableMapping as DictMixin
     import pickle
     from io import BytesIO
     basestring = str
@@ -105,7 +105,7 @@ else: # 2.x
         def next(it): return it.next()
         bytes = str
     else: # 2.6, 2.7
-        from collections import MutableMapping as DictMixin
+        from collections.abc import MutableMapping as DictMixin
     json_loads = json_lds
 
 # Some helpers for string/byte handling
@@ -1653,7 +1653,7 @@ class _ImportRedirect(object):
         ''' Create a virtual package that redirects imports (see PEP 302). '''
         self.name = name
         self.impmask = impmask
-        self.module = sys.modules.setdefault(name, imp.new_module(name))
+        self.module = sys.modules.setdefault(name, types.ModuleType(name))
         self.module.__dict__.update({'__file__': __file__, '__path__': [],
                                     '__all__': [], '__loader__': self})
         sys.meta_path.append(self)

@@ -20,13 +20,13 @@ import sys
 if sys.version_info.major != 3:
     raise Exception("This program needs Python 3!")
 
-from mappings import virama, schwa, ellipsis
-from mappings import akhand
-from mappings import vowels, consonants, various_signs, dashes
-from mappings import punctuation, paired_punctuation
-from mappings import numbers, number_prefix
-from mappings import math_punctuation
-from mappings import dumb_quotes, math_symbols
+from .mappings import virama, schwa, ellipsis
+from .mappings import akhand
+from .mappings import vowels, consonants, various_signs, dashes
+from .mappings import punctuation, paired_punctuation
+from .mappings import numbers, number_prefix
+from .mappings import math_punctuation
+from .mappings import dumb_quotes, math_symbols
 
 # Sets of all consonants, and vowel characters.
 # This list is used for the vowel idiosyncracy where 'अ' is placed explicitly 
